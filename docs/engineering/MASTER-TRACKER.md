@@ -616,7 +616,9 @@ Platform: HaitiGov
   Public URL: <https://haitigov.vercel.app>.
 - Project settings: Next.js, root `apps/web`, Node `24.x`, install
   `pnpm install --frozen-lockfile`, build
-  `pnpm --filter @haitigov/web build`, output `.next`. Deploy the repository
+  `pnpm exec turbo run build --filter=@haitigov/web...`, output `.next`.
+  The dependency-aware build is required for clean GitHub checkouts because
+  shared packages export compiled JavaScript. Deploy the repository
   root, not the app directory. Verify the exact project ID before deploying;
   never reuse the unrelated `web` project or KobKlein domains.
 - Deployment `dpl_5UPWWR4U3HVBnayGitXSdCPj5Yan` reached READY with a successful
@@ -635,6 +637,15 @@ Platform: HaitiGov
   Run unit tests; the visual-regression job and CodeQL passed. This deployment
   is a proposed-platform UI publication, not completion of production
   readiness, backend integration, security remediation, or the broader phase.
+- GitHub-source verification: redeployment
+  `dpl_BMhpE4iBUJ4ch4i64XVMpciFcRkM` of commit `d91f60a` reached READY after
+  correcting the dependency build. Vercel reported a 33-second build and
+  HaitiGov-only aliases, including `haitigov.vercel.app` and the configured
+  `haitigov.org` / `www.haitigov.org` domains. No custom-domain configuration
+  was changed during this correction. The error query returned zero records.
+- CI failure detail: the Quality and build job attempted Playwright tests
+  without an installed Chromium headless-shell executable. The CI browser
+  installation/order needs separate repair; this is not a passing test suite.
 
 ---
 
