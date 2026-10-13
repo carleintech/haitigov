@@ -1,0 +1,14 @@
+{
+  "extends": "@haitigov/typescript-config/base.json",
+  "compilerOptions": { "jsx": "react-jsx", "noEmit": true, "plugins": [{ "name": "next" }] },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "app/**/*.tsx",
+    "app/**/*.ts",
+    "next.config.ts",
+    "playwright.config.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

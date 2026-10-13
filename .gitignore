@@ -1,0 +1,34 @@
+# Dependencies and package-manager state
+node_modules/
+.pnpm-store/
+
+# Turborepo
+.turbo/
+
+# Build and test output
+.tmp/
+.next/
+dist/
+build/
+coverage/
+playwright-report/
+storybook-static/
+test-results/
+*.tsbuildinfo
+backups/
+packages/database/generated/
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+pnpm-debug.log*

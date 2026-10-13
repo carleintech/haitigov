@@ -1,0 +1,22 @@
+.git
+.husky
+.next
+.pnpm-store
+.turbo
+build
+coverage
+dist
+node_modules
+storybook-static
+packages/database/generated
+*.log
+.env
+.env.*
+!.env.example
+donne sample
+*.jpeg
+*.jpg
+*.pdf
+*.png
+!apps/storybook/tests/__screenshots__/*.png
+*.xlsx

@@ -1,0 +1,32 @@
+{
+  "name": "@haitigov/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run tests/public-service-discovery.test.ts && playwright test",
+    "test:accessibility": "playwright test tests/accessibility.spec.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@haitigov/contracts": "workspace:*",
+    "@haitigov/branding": "workspace:*",
+    "@haitigov/design-system": "workspace:*",
+    "@haitigov/ui": "workspace:*",
+    "next": "16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@haitigov/typescript-config": "workspace:*",
+    "@playwright/test": "1.63.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "vitest": "5.0.2"
+  }
+}

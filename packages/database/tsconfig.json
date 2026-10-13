@@ -1,0 +1,9 @@
+{
+  "extends": "@haitigov/typescript-config/base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["generated/**/*.ts", "prisma/**/*.ts", "prisma.config.ts", "src/**/*.ts"]
+}

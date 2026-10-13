@@ -1,0 +1,17 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Installs are explicit and frozen in bootstrap, Docker, and CI. Disabling
+# implicit pre-script installs avoids races and makes read-only validation work.
+allowBuilds:
+  "@scarf/scarf": false
+  "@prisma/engines": true
+  esbuild: true
+  prisma: true
+
+verifyDepsBeforeRun: false
+
+overrides:
+  deepmerge-ts: 8.0.0
+  mysql2: 3.23.1

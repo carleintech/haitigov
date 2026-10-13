@@ -1,0 +1,387 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum InstitutionType {
+  AUTONOMOUS_BODY
+  CENTRAL_DIRECTORATE
+  DECONCENTRATED_SERVICE
+  EXECUTIVE_COUNCIL
+  MINISTRY
+  PRESIDENCY
+  PRIMATURE
+  PUBLIC_BODY
+  PUBLIC_ENTERPRISE
+  PUBLIC_FINANCIAL_INSTITUTION
+  REGULATORY_AUTHORITY
+  OTHER
+}
+
+enum GovernmentBranch {
+  EXECUTIVE
+  JUDICIAL
+  LEGISLATIVE
+  INDEPENDENT
+  TERRITORIAL
+  OTHER
+}
+
+enum VerificationStatus {
+  PENDING_REVIEW
+  PARTIALLY_VERIFIED
+  VERIFIED_CURRENT
+  VERIFIED_LEGACY
+  SUPERSEDED
+  REJECTED
+}
+
+enum InstitutionStatus {
+  UNKNOWN
+  ACTIVE
+  INACTIVE
+  HISTORICAL
+  SUPERSEDED
+}
+
+enum InstitutionAliasType {
+  ACRONYM
+  FORMER_NAME
+  SHORT_NAME
+  TRANSLATION
+  OTHER
+}
+
+enum InstitutionRelationshipType {
+  PARENT_OF
+  OVERSEES
+  COORDINATES
+  SUCCESSOR_OF
+  PREDECESSOR_OF
+  RELATED_TO
+}
+
+enum InstitutionOfficeType {
+  DELEGATION
+  VICE_DELEGATION
+}
+
+enum InstitutionOfficeCoverage {
+  DEPARTMENT
+  ARRONDISSEMENT
+}
+
+enum TerritoryLevel {
+  DEPARTMENT
+  ARRONDISSEMENT
+  COMMUNE
+  COMMUNAL_SECTION
+}
+
+enum RegistrySubjectType {
+  INSTITUTION
+  INSTITUTION_OFFICE
+  DEPARTMENT
+  ARRONDISSEMENT
+  COMMUNE
+  COMMUNAL_SECTION
+  DATA_CLASSIFICATION
+  SERVICE
+}
+
+enum ServiceStatus {
+  DRAFT
+  PUBLISHED
+  RETIRED
+}
+
+enum VerificationOutcome {
+  CONFIRMED
+  PARTIALLY_CONFIRMED
+  UNRESOLVED
+  REJECTED
+  SUPERSEDED
+}
+
+enum AuditResult {
+  SUCCESS
+  FAILURE
+  DENIED
+  ERROR
+}
+
+model SystemMetadata {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("system_metadata")
+}
+
+model DataClassification {
+  code         String        @id
+  name         String
+  description  String
+  rank         Int           @unique
+  institutions Institution[]
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@map("data_classifications")
+}
+
+model Institution {
+  id                     String                    @id
+  acronym                String?
+  officialName           String                    @map("official_name")
+  institutionType        InstitutionType           @map("institution_type")
+  branch                 GovernmentBranch
+  jurisdiction           String
+  proposedDataDomain     String?                   @map("proposed_data_domain")
+  proposedRoute          String?                   @unique @map("proposed_route")
+  notes                  String?
+  status                 InstitutionStatus         @default(UNKNOWN)
+  verificationStatus     VerificationStatus        @default(PENDING_REVIEW) @map("verification_status")
+  dataClassificationCode String?                   @map("data_classification_code")
+  dataClassification     DataClassification?       @relation(fields: [dataClassificationCode], references: [code], onDelete: Restrict)
+  aliases                InstitutionAlias[]
+  outgoingRelationships  InstitutionRelationship[] @relation("RelationshipSource")
+  incomingRelationships  InstitutionRelationship[] @relation("RelationshipTarget")
+  offices                InstitutionOffice[]
+  createdAt              DateTime                  @default(now()) @map("created_at")
+  updatedAt              DateTime                  @updatedAt @map("updated_at")
+
+  @@index([acronym])
+  @@index([institutionType])
+  @@index([status])
+  @@index([verificationStatus])
+  @@map("institutions")
+}
+
+model InstitutionOffice {
+  id                 String                    @id
+  institutionId      String                    @map("institution_id")
+  institution        Institution               @relation(fields: [institutionId], references: [id], onDelete: Restrict)
+  officeType         InstitutionOfficeType     @map("office_type")
+  departmentId       String                    @map("department_id")
+  department         Department                @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  arrondissementId   String?                   @map("arrondissement_id")
+  arrondissement     Arrondissement?           @relation(fields: [arrondissementId], references: [id], onDelete: Restrict)
+  locality           String
+  coverage           InstitutionOfficeCoverage
+  verificationStatus VerificationStatus        @default(PENDING_REVIEW) @map("verification_status")
+  createdAt          DateTime                  @default(now()) @map("created_at")
+  updatedAt          DateTime                  @updatedAt @map("updated_at")
+
+  @@index([institutionId])
+  @@index([departmentId])
+  @@index([arrondissementId])
+  @@index([verificationStatus])
+  @@map("institution_offices")
+}
+
+model InstitutionAlias {
+  id            String               @id @default(cuid())
+  institutionId String               @map("institution_id")
+  institution   Institution          @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  name          String
+  aliasType     InstitutionAliasType @map("alias_type")
+  locale        String?
+  isPreferred   Boolean              @default(false) @map("is_preferred")
+  validFrom     DateTime?            @map("valid_from")
+  validTo       DateTime?            @map("valid_to")
+  createdAt     DateTime             @default(now()) @map("created_at")
+  updatedAt     DateTime             @updatedAt @map("updated_at")
+
+  @@unique([institutionId, name, aliasType, locale])
+  @@index([name])
+  @@map("institution_aliases")
+}
+
+model InstitutionRelationship {
+  id                  String                      @id @default(cuid())
+  sourceInstitutionId String                      @map("source_institution_id")
+  targetInstitutionId String                      @map("target_institution_id")
+  relationshipType    InstitutionRelationshipType @map("relationship_type")
+  sourceInstitution   Institution                 @relation("RelationshipSource", fields: [sourceInstitutionId], references: [id], onDelete: Restrict)
+  targetInstitution   Institution                 @relation("RelationshipTarget", fields: [targetInstitutionId], references: [id], onDelete: Restrict)
+  effectiveFrom       DateTime?                   @map("effective_from")
+  effectiveTo         DateTime?                   @map("effective_to")
+  notes               String?
+  createdAt           DateTime                    @default(now()) @map("created_at")
+  updatedAt           DateTime                    @updatedAt @map("updated_at")
+
+  @@unique([sourceInstitutionId, targetInstitutionId, relationshipType, effectiveFrom])
+  @@index([targetInstitutionId, relationshipType])
+  @@map("institution_relationships")
+}
+
+model Department {
+  id                   String                                       @id
+  ihsiCode             String                                       @unique @map("ihsi_code")
+  name                 String                                       @unique
+  capital              String
+  arrondissementCount  Int?                                         @map("arrondissement_count")
+  communeCount         Int?                                         @map("commune_count")
+  communalSectionCount Int?                                         @map("communal_section_count")
+  quartierCount        Int?                                         @map("quartier_count")
+  proposedRoute        String?                                      @unique @map("proposed_route")
+  verificationStatus   VerificationStatus                           @default(PENDING_REVIEW) @map("verification_status")
+  boundary             Unsupported("geometry(MultiPolygon, 4326)")?
+  arrondissements      Arrondissement[]
+  institutionOffices   InstitutionOffice[]
+  createdAt            DateTime                                     @default(now()) @map("created_at")
+  updatedAt            DateTime                                     @updatedAt @map("updated_at")
+
+  @@map("departments")
+}
+
+model Arrondissement {
+  id                 String                                       @id
+  departmentId       String                                       @map("department_id")
+  department         Department                                   @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  name               String
+  communeCount       Int?                                         @map("commune_count")
+  proposedRoute      String?                                      @unique @map("proposed_route")
+  verificationStatus VerificationStatus                           @default(PENDING_REVIEW) @map("verification_status")
+  boundary           Unsupported("geometry(MultiPolygon, 4326)")?
+  communes           Commune[]
+  institutionOffices InstitutionOffice[]
+  createdAt          DateTime                                     @default(now()) @map("created_at")
+  updatedAt          DateTime                                     @updatedAt @map("updated_at")
+
+  @@unique([departmentId, name])
+  @@index([departmentId])
+  @@map("arrondissements")
+}
+
+model Commune {
+  id                 String                                       @id
+  arrondissementId   String                                       @map("arrondissement_id")
+  arrondissement     Arrondissement                               @relation(fields: [arrondissementId], references: [id], onDelete: Restrict)
+  name               String
+  proposedRoute      String?                                      @unique @map("proposed_route")
+  verificationStatus VerificationStatus                           @default(PENDING_REVIEW) @map("verification_status")
+  boundary           Unsupported("geometry(MultiPolygon, 4326)")?
+  communalSections   CommunalSection[]
+  createdAt          DateTime                                     @default(now()) @map("created_at")
+  updatedAt          DateTime                                     @updatedAt @map("updated_at")
+
+  @@unique([arrondissementId, name])
+  @@index([arrondissementId])
+  @@map("communes")
+}
+
+model CommunalSection {
+  id                 String                                       @id
+  communeId          String                                       @map("commune_id")
+  commune            Commune                                      @relation(fields: [communeId], references: [id], onDelete: Restrict)
+  name               String
+  proposedRoute      String?                                      @unique @map("proposed_route")
+  verificationStatus VerificationStatus                           @default(PENDING_REVIEW) @map("verification_status")
+  boundary           Unsupported("geometry(MultiPolygon, 4326)")?
+  createdAt          DateTime                                     @default(now()) @map("created_at")
+  updatedAt          DateTime                                     @updatedAt @map("updated_at")
+
+  @@unique([communeId, name])
+  @@index([communeId])
+  @@map("communal_sections")
+}
+
+model Source {
+  id                String         @id @default(cuid())
+  name              String
+  sourceUrl         String?        @map("source_url")
+  sourceInstitution String?        @map("source_institution")
+  description       String?
+  records           SourceRecord[]
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt @map("updated_at")
+
+  @@unique([name, sourceUrl])
+  @@map("sources")
+}
+
+model SourceRecord {
+  id            String              @id @default(cuid())
+  sourceId      String              @map("source_id")
+  source        Source              @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  subjectType   RegistrySubjectType @map("subject_type")
+  subjectId     String              @map("subject_id")
+  externalId    String?             @map("external_id")
+  sourceUrl     String?             @map("source_url")
+  retrievedAt   DateTime?           @map("retrieved_at")
+  effectiveFrom DateTime?           @map("effective_from")
+  effectiveTo   DateTime?           @map("effective_to")
+  payloadHash   String?             @map("payload_hash")
+  notes         String?
+  verifications VerificationEvent[]
+  createdAt     DateTime            @default(now()) @map("created_at")
+  updatedAt     DateTime            @updatedAt @map("updated_at")
+
+  @@index([subjectType, subjectId])
+  @@index([sourceId])
+  @@map("source_records")
+}
+
+model ServiceCatalogEntry {
+  id                 String             @id
+  institutionId      String?            @map("institution_id")
+  name               String
+  description        String?
+  locale             String             @default("fr")
+  status             ServiceStatus      @default(DRAFT)
+  verificationStatus VerificationStatus @default(PENDING_REVIEW) @map("verification_status")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
+
+  @@index([institutionId])
+  @@index([status, verificationStatus])
+  @@map("service_catalog_entries")
+}
+
+model VerificationEvent {
+  id             String              @id @default(cuid())
+  subjectType    RegistrySubjectType @map("subject_type")
+  subjectId      String              @map("subject_id")
+  sourceRecordId String?             @map("source_record_id")
+  sourceRecord   SourceRecord?       @relation(fields: [sourceRecordId], references: [id], onDelete: SetNull)
+  outcome        VerificationOutcome
+  verifiedAt     DateTime            @map("verified_at")
+  verifiedBy     String?             @map("verified_by")
+  notes          String?
+  createdAt      DateTime            @default(now()) @map("created_at")
+
+  @@index([subjectType, subjectId, verifiedAt])
+  @@index([sourceRecordId])
+  @@map("verification_events")
+}
+
+model AuditEvent {
+  id              String      @id @default(cuid())
+  occurredAt      DateTime    @default(now()) @map("occurred_at")
+  actorId         String?     @map("actor_id")
+  institutionId   String?     @map("institution_id")
+  action          String
+  resourceType    String      @map("resource_type")
+  resourceId      String?     @map("resource_id")
+  purpose         String?
+  result          AuditResult
+  correlationId   String      @map("correlation_id")
+  source          String
+  securityContext Json?       @map("security_context")
+  metadata        Json?
+
+  @@index([occurredAt])
+  @@index([actorId, occurredAt])
+  @@index([institutionId, occurredAt])
+  @@index([correlationId])
+  @@index([resourceType, resourceId])
+  @@map("audit_events")
+}

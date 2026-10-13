@@ -1,0 +1,48 @@
+name: haitigov
+
+services:
+  postgres:
+    image: postgis/postgis:17-3.5@sha256:01a6a70e41e6c4467c8f55f6063555ed72db2d6662cd0d571040d42eadaeb6f6
+    container_name: haitigov-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${HAITIGOV_DB_NAME:-haitigov_dev}
+      POSTGRES_INITDB_ARGS: --data-checksums
+      POSTGRES_PASSWORD: ${HAITIGOV_DB_PASSWORD:?Set HAITIGOV_DB_PASSWORD in the ignored root .env file}
+      POSTGRES_USER: ${HAITIGOV_DB_USER:-haitigov}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    ports:
+      - "127.0.0.1:${HAITIGOV_DB_PORT:-55433}:5432"
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 30s
+    volumes:
+      - haitigov_postgres_data:/var/lib/postgresql/data
+
+  workspace-check:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: foundation
+    command: ["pnpm", "run", "check:container"]
+    environment:
+      HAITIGOV_ENVIRONMENT: development
+      LOG_LEVEL: info
+      NODE_ENV: development
+      TURBO_CACHE_DIR: /tmp/turbo
+      XDG_DATA_HOME: /tmp/share
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+
+volumes:
+  haitigov_postgres_data:
+    name: haitigov_postgres_data

@@ -1,0 +1,177 @@
+:root,
+[data-hg-theme="light"] {
+  color-scheme: light;
+  --hg-color-national-blue: #00209f;
+  --hg-color-national-red: #d21034;
+  --hg-color-national-white: #ffffff;
+  --hg-color-background: #ffffff;
+  --hg-color-surface: #f7f9fc;
+  --hg-color-surface-strong: #edf1f7;
+  --hg-color-text: #09101a;
+  --hg-color-text-muted: #48576a;
+  --hg-color-border: #b8c3d1;
+  --hg-color-border-strong: #647386;
+  --hg-color-action: #103782;
+  --hg-color-action-hover: #0e2e68;
+  --hg-color-action-text: #ffffff;
+  --hg-color-focus: #e5ad22;
+  --hg-color-focus-inner: #09101a;
+  --hg-color-danger: #a80f35;
+  --hg-color-danger-surface: #fff0f3;
+  --hg-color-success: #0b6335;
+  --hg-color-success-surface: #edfdf4;
+  --hg-color-warning: #824900;
+  --hg-color-warning-surface: #fff8e6;
+  --hg-color-information: #123fa8;
+  --hg-color-information-surface: #eef5ff;
+  --hg-font-sans: "Noto Sans", "Segoe UI", Arial, sans-serif;
+  --hg-font-display: "Noto Sans", "Segoe UI", Arial, sans-serif;
+  --hg-font-mono: "Noto Sans Mono", "Cascadia Mono", Consolas, monospace;
+  --hg-font-size-xs: 0.75rem;
+  --hg-font-size-sm: 0.875rem;
+  --hg-font-size-md: 1rem;
+  --hg-font-size-lg: 1.125rem;
+  --hg-font-size-xl: 1.25rem;
+  --hg-font-size-2xl: 1.5rem;
+  --hg-font-size-3xl: 1.875rem;
+  --hg-font-size-4xl: 2.25rem;
+  --hg-font-size-5xl: 3rem;
+  --hg-line-height-compact: 1.2;
+  --hg-line-height-heading: 1.25;
+  --hg-line-height-body: 1.5;
+  --hg-line-height-relaxed: 1.65;
+  --hg-space-0: 0;
+  --hg-space-1: 0.25rem;
+  --hg-space-2: 0.5rem;
+  --hg-space-3: 0.75rem;
+  --hg-space-4: 1rem;
+  --hg-space-5: 1.25rem;
+  --hg-space-6: 1.5rem;
+  --hg-space-8: 2rem;
+  --hg-space-10: 2.5rem;
+  --hg-space-12: 3rem;
+  --hg-space-16: 4rem;
+  --hg-space-20: 5rem;
+  --hg-space-24: 6rem;
+  --hg-radius-sm: 0.25rem;
+  --hg-radius-md: 0.5rem;
+  --hg-radius-lg: 0.75rem;
+  --hg-radius-xl: 1rem;
+  --hg-shadow-low: 0 1px 2px rgb(9 16 26 / 10%);
+  --hg-shadow-medium: 0 6px 18px rgb(9 16 26 / 14%);
+  --hg-shadow-high: 0 16px 40px rgb(9 16 26 / 18%);
+  --hg-grid-max-width: 75rem;
+  --hg-grid-gutter: 1rem;
+  --hg-motion-fast: 120ms;
+  --hg-motion-normal: 200ms;
+  --hg-motion-slow: 320ms;
+  --hg-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--hg-font-sans);
+  line-height: var(--hg-line-height-body);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--hg-color-background);
+  color: var(--hg-color-text);
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--hg-color-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 1px var(--hg-color-focus-inner);
+}
+
+::selection {
+  background: var(--hg-color-action);
+  color: var(--hg-color-action-text);
+}
+
+.hg-visually-hidden:not(:focus, :active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hg-skip-link {
+  position: fixed;
+  top: var(--hg-space-3);
+  left: var(--hg-space-3);
+  z-index: 500;
+  padding: var(--hg-space-3) var(--hg-space-4);
+  border-radius: var(--hg-radius-md);
+  background: var(--hg-color-action);
+  color: var(--hg-color-action-text);
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.hg-skip-link:focus {
+  transform: translateY(0);
+}
+
+.hg-container {
+  width: min(100% - (2 * var(--hg-grid-gutter)), var(--hg-grid-max-width));
+  margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  :root,
+  [data-hg-theme="light"] {
+    --hg-grid-gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root,
+  [data-hg-theme="light"] {
+    --hg-grid-gutter: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hg-motion-fast: 0ms;
+    --hg-motion-normal: 0ms;
+    --hg-motion-slow: 0ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+  }
+
+  .hg-skip-link {
+    border: 1px solid ButtonText;
+  }
+}

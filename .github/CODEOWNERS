@@ -1,0 +1,10 @@
+# CODEOWNERS cannot be activated safely until the repository's GitHub owner and
+# valid team/user handles are known. Replace the examples below, then remove the
+# leading comment markers.
+#
+# *                         @organization/platform-team
+# /apps/api/                @organization/platform-team
+# /packages/security/       @organization/security-team
+# /infrastructure/          @organization/cloud-platform-team
+# /data/                    @organization/government-data-team
+# /packages/ui/             @organization/design-system-team

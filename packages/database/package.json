@@ -1,0 +1,38 @@
+{
+  "name": "@haitigov/database",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "db:generate": "prisma generate",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:status": "prisma migrate status",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio --port 5555",
+    "lint": "eslint src prisma prisma.config.ts --max-warnings=0",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "dotenv": "18.0.4",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@haitigov/typescript-config": "workspace:*",
+    "@types/node": "24.13.6",
+    "@types/pg": "8.23.1",
+    "prisma": "7.10.0",
+    "tsx": "4.23.13"
+  }
+}

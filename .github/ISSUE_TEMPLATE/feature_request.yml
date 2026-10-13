@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a scoped platform capability
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the public, institutional, or operator need.
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Data ownership and authority
+      description: Identify the authoritative institution and known policy basis, or state UNKNOWN.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Scope and boundaries
+      description: Include security, privacy, accessibility, language, and integration constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
