@@ -606,6 +606,36 @@ Platform: HaitiGov
   ESLint, Biome, and the Next.js production build. Manual accessibility review
   and verified catalogue coverage remain open.
 
+### Dedicated Vercel publication — 2026-10-13
+
+- GitHub source: `carleintech/haitigov`, branch `main`; initial source commit
+  `f95f579`. The existing GitHub repository is public.
+- Dedicated Vercel project: `haitigov` in
+  `erickharlein-pierres-projects`, project ID
+  `prj_OJ8kP3udZKt6BJkS9PrqNjjcbxeB`, connected to that GitHub repository.
+  Public URL: <https://haitigov.vercel.app>.
+- Project settings: Next.js, root `apps/web`, Node `24.x`, install
+  `pnpm install --frozen-lockfile`, build
+  `pnpm --filter @haitigov/web build`, output `.next`. Deploy the repository
+  root, not the app directory. Verify the exact project ID before deploying;
+  never reuse the unrelated `web` project or KobKlein domains.
+- Deployment `dpl_5UPWWR4U3HVBnayGitXSdCPj5Yan` reached READY with a successful
+  remote production build. Browser checks returned HTTP 200 for `/fr`,
+  `/services`, and `/fr/services`, with expected localized headings and no
+  captured page errors. The initial one-hour Vercel error-log query returned
+  zero records; monitoring/drains were not verified.
+- Publication correction: an earlier deployment incorrectly targeted the
+  unrelated `web` project and its KobKlein production alias. This dedicated
+  deployment does not restore that site. Restoration requires owner approval;
+  no rollback or domain mutation was performed during this correction.
+- Both local project links now target `haitigov`. Local Vercel directories
+  and environment files remain ignored; the production environment file
+  previously pulled from the unrelated project was removed.
+- Release checks remain open: GitHub CI's Quality and build job failed at
+  Run unit tests; the visual-regression job and CodeQL passed. This deployment
+  is a proposed-platform UI publication, not completion of production
+  readiness, backend integration, security remediation, or the broader phase.
+
 ---
 
 # Phase 6 — Identity & Access Foundation
