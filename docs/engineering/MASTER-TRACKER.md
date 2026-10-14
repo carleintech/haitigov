@@ -465,8 +465,23 @@ Platform: HaitiGov
 
 ## Phase 5 Verified Institution Directory Boundary — 2026-10-05
 
-              work.
-
+- Restricted public institution list and detail queries to current or legacy
+  verified records. Pending and partially verified records cannot be retrieved
+  through public list filters or canonical-ID detail requests.
+- Shared contracts and OpenAPI metadata now expose only public verification
+  statuses; API regression tests cover rejection of non-public filters and
+  repository-level list/detail filtering.
+- Connected Kreyòl and French ministry directory pages to the verified public
+  institution API, with ministry-type filtering, search, and explicit
+  prototype/non-official notices.
+- Contract, API, and web TypeScript checks passed. Contract build, API
+  production build, and Next.js production build passed; Next.js generated all
+  25 routes.
+- Focused API, web service-discovery, and contract tests passed (8, 9, and 2
+  tests respectively). Biome formatting passed. Focused ESLint passed for the
+  API and web files; linting the touched contracts module still reports the
+  existing deprecated `z.string().url()` call at line 251. It was not changed
+  because it is unrelated to this work.
 - The data-backed public directory remains incomplete: only appropriately
   verified records are shown, and source coverage, the broader directory, and
   manual accessibility review remain open. No institutional records or
