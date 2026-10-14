@@ -845,11 +845,19 @@ Platform: HaitiGov
   SBOM and infrastructure scan passed. The foundation-container Grype scan
   failed on high-or-higher vulnerabilities; that separate container is not
   used by this Vercel web deployment. Its findings remain an open gate, not
-  suppressed or reported as a passing security check. Remote CI verification
-  remains pending for the corrected homepage assertions.
+  suppressed or reported as a passing security check.
+- [x] Corrected assertions passed locally in both languages.
+  Validated release commit `f2883f61c3b56d3769f1a54fdb53922bbeee35f5`
+  passed remote Quality and build (formatting, lint, types, all unit tests,
+  89 Chromium journeys, production build and secret scan) and design-system
+  visual regression in CI run `38624149400`.
+  Its dedicated Next.js production deployment
+  `dpl_EzgCtTURcVsdrXxVwc9M7Jq5URDr` is READY (17-second build).
+  Final live smoke checks passed both commune and Explore routes; no
+  runtime/hydration page errors or deployment-scoped error logs were found.
 - Node patch compliance, connected production API, verified content/media
-  rights and identity approvals, manual accessibility and outstanding CI
-  repair remain open. Deployment must not imply government adoption or
+  rights and identity approvals, manual accessibility and foundation-container
+  vulnerability remediation remain open. Deployment must not imply government adoption or
   completion of production-readiness gates.
 
 ---
