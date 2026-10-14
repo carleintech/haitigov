@@ -289,8 +289,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@nestjs/testing':
-        specifier: 12.1.0
-        version: 12.1.0(@nestjs/common@12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2))(@nestjs/core@12.1.0)(@nestjs/platform-express@12.1.0)
+        specifier: 12.1.2
+        version: 12.1.2(@nestjs/common@12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2))(@nestjs/core@12.1.0)(@nestjs/platform-express@12.1.0)
       '@types/node':
         specifier: 24.13.6
         version: 24.13.6
@@ -1372,8 +1372,8 @@ packages:
       typescript:
         optional: true
 
-  '@nestjs/testing@12.1.0':
-    resolution: {integrity: sha512-OL6ar+p4BRy26YlOk6nqSchGShQajW0jaPSz2tvP7C3dLQcb26Wm0AG2IlvqIBoHuN3zQFMc5DoLAyiosPP4pw==}
+  '@nestjs/testing@12.1.2':
+    resolution: {integrity: sha512-JgetYeGHGK6iUEztXyiQLOfYLWqUgAyexLMzhuAMasgLiDgYShh/PoRESE9tzpRZo4eWKme3uSZ9DFR6Myuojw==}
     peerDependencies:
       '@nestjs/common': ^12.0.0
       '@nestjs/core': ^12.0.0
@@ -5220,7 +5220,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@nestjs/testing@12.1.0(@nestjs/common@12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2))(@nestjs/core@12.1.0)(@nestjs/platform-express@12.1.0)':
+  '@nestjs/testing@12.1.2(@nestjs/common@12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2))(@nestjs/core@12.1.0)(@nestjs/platform-express@12.1.0)':
     dependencies:
       '@nestjs/common': 12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2)
       '@nestjs/core': 12.1.0(@nestjs/common@12.1.0(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@10.2.2))(@nestjs/platform-express@12.1.0)(reflect-metadata@0.2.2)(rxjs@7.8.2)
