@@ -833,8 +833,20 @@ Platform: HaitiGov
   in separate, uncommitted announcement repository tests, outside this release.
 - The quality job now installs pinned Playwright Chromium and Linux system
   dependencies before running public-page tests, matching the existing
-  design-system job. Remote CI and follow-up deployment verification remain
-  pending for this bounded release repair.
+  design-system job. Remote CI then passed 87 of 89 browser tests; two homepage
+  assertions retained an outdated supported-route list. The list now includes
+  both implemented Explore routes, independently verified live with status 200.
+- Follow-up tooling commit `734b9540104ef991164f7d0a0d0c5128b24002da`
+  deployed READY as `dpl_8oRxuHPkE6C35nCrqRE5pGY2T443` (19-second build).
+  Live verification traversed all 149 distinct communes across 17 pages in
+  each locale and decoded artwork on five public pages without runtime errors.
+  Its deployment-scoped error-log query returned no logs.
+- Remote CodeQL, design-system visual regression, dependency/secret audit,
+  SBOM and infrastructure scan passed. The foundation-container Grype scan
+  failed on high-or-higher vulnerabilities; that separate container is not
+  used by this Vercel web deployment. Its findings remain an open gate, not
+  suppressed or reported as a passing security check. Remote CI verification
+  remains pending for the corrected homepage assertions.
 - Node patch compliance, connected production API, verified content/media
   rights and identity approvals, manual accessibility and outstanding CI
   repair remain open. Deployment must not imply government adoption or
