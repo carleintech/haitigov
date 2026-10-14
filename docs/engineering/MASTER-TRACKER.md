@@ -6,7 +6,7 @@ Platform: HaitiGov
 
 ## Overall Engineering Progress
 
-31.2% (109 of 349 tracked items complete; 3 items blocked; 13 items in progress)
+31.5% (110 of 349 tracked items complete; 3 items blocked; 12 items in progress)
 
 ---
 
@@ -366,7 +366,7 @@ Platform: HaitiGov
 - [x] Institution pages
 - [x] Ministry pages
 - [x] Service discovery
-- [~] Search
+- [x] Search
 - [~] News/announcements
 - [~] Public documents
 - [~] Transparency landing page
@@ -509,6 +509,20 @@ Platform: HaitiGov
   not convert unresolved institution candidates into verified records or imply
   official Government of Haiti adoption. Manual accessibility review remains
   tracked separately.
+
+## Phase 5 Bilingual Global Search — 2026-10-13
+
+- Connected `/search` and `/fr/recherche` to both the public institution and
+  service APIs through a shared parallel orchestration layer.
+- Each catalogue retains its own runtime schema, publication/verification
+  gate, availability state, and empty state. A failure in one source cannot be
+  presented as an empty result from the other.
+- Oversized queries are rejected before transport. Institution results remain
+  limited to current or visibly legacy verified records; service results remain
+  limited to published and currently verified records.
+- Eleven web unit tests, focused Biome and ESLint, strict web TypeScript, both
+  search-route WCAG A/AA browser checks, and the 27-route production web build
+  passed.
 
 ## Phase 5 Homepage Intro Playback — 2026-10-05
 
@@ -1045,8 +1059,8 @@ Latest focused validation:
 - A fresh high-severity dependency audit passed with no known vulnerabilities
   after pinning patched transitive releases for two newly published advisories.
 
-Next implementation target: continue the remaining unblocked Phase 5 public
-portal capabilities in sequence while keeping the deferred Phase 3
+Next implementation target: continue Phase 5 news/announcements and public
+document capabilities while keeping the deferred Phase 3
 identity/taxonomy and named communal-section items blocked until authoritative
 sources are available. Do not infer names or institutional status. Manual
 accessibility review and incomplete source coverage remain open.

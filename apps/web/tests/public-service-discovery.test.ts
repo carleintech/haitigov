@@ -5,6 +5,7 @@ import {
   parseInstitutionSearchQuery,
   searchPublicInstitutions,
 } from "../app/_data/public-institutions.js";
+import { searchPublicPortal } from "../app/_data/public-search.js";
 import { parseSearchQuery, searchPublicServices } from "../app/_data/public-services.js";
 
 const institution = {
@@ -188,5 +189,72 @@ describe("public service discovery", () => {
     await expect(
       searchPublicServices("", "ht", "https://api.example/v1", request),
     ).resolves.toEqual({ state: "unavailable" });
+  });
+});
+
+describe("public portal search", () => {
+  it("searches institution and service catalogues without weakening either public gate", async () => {
+    const request = vi.fn<typeof fetch>().mockImplementation((input) => {
+      const url =
+        input instanceof URL ? input : new URL(typeof input === "string" ? input : input.url);
+      if (url.pathname.endsWith("/services")) {
+        return Promise.resolve({
+          json: () =>
+            Promise.resolve({
+              items: [
+                {
+                  description: "Verified service description",
+                  institutionId: institution.institutionId,
+                  name: "Verified service",
+                  serviceId: "verified-service",
+                  status: "PUBLISHED",
+                  verificationStatus: "VERIFIED_CURRENT",
+                },
+              ],
+              nextCursor: null,
+            }),
+          ok: true,
+        } as Response);
+      }
+
+      const verificationStatus = url.searchParams.get("verificationStatus");
+      return Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            items:
+              verificationStatus === "VERIFIED_CURRENT"
+                ? [institution]
+                : [
+                    {
+                      ...institution,
+                      institutionId: "HT-LEGACY",
+                      officialName: "Legacy development fixture",
+                      verificationStatus: "VERIFIED_LEGACY",
+                    },
+                  ],
+            nextCursor: null,
+          }),
+        ok: true,
+      } as Response);
+    });
+
+    const result = await searchPublicPortal("passport", "fr", {
+      apiBaseUrl: "https://api.example/v1",
+      request,
+    });
+
+    expect(request).toHaveBeenCalledTimes(3);
+    expect(result.institutions).toMatchObject({ state: "ready", items: { length: 2 } });
+    expect(result.services).toMatchObject({ state: "ready", items: { length: 1 } });
+  });
+
+  it("rejects oversized queries before any catalogue request", async () => {
+    const request = vi.fn<typeof fetch>();
+
+    await expect(searchPublicPortal("x".repeat(101), "ht", { request })).resolves.toEqual({
+      institutions: { state: "invalid-query" },
+      services: { state: "invalid-query" },
+    });
+    expect(request).not.toHaveBeenCalled();
   });
 });

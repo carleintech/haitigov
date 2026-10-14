@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { InstitutionResults } from "../../_components/institution-results.js";
 import { ServiceResults } from "../../_components/service-results.js";
-import { parseSearchQuery, searchPublicServices } from "../../_data/public-services.js";
+import { searchPublicPortal } from "../../_data/public-search.js";
+import { parseSearchQuery } from "../../_data/public-services.js";
 import { FrenchSourceGatedPage } from "../_components/source-gated-page.js";
 
 export const metadata: Metadata = {
@@ -15,7 +17,12 @@ export default async function FrenchSearchPage({
 }) {
   const query = parseSearchQuery((await searchParams).q);
   const result =
-    query === null ? { state: "invalid-query" as const } : await searchPublicServices(query, "fr");
+    query === null
+      ? {
+          institutions: { state: "invalid-query" as const },
+          services: { state: "invalid-query" as const },
+        }
+      : await searchPublicPortal(query, "fr");
   return (
     <FrenchSourceGatedPage
       banner="Les résultats proviendront uniquement de contenus publics dotés d’une source et d’un statut de vérification."
@@ -31,7 +38,8 @@ export default async function FrenchSearchPage({
         placeholder: "Exemple : passeport, MEF, école",
       }}
     >
-      <ServiceResults result={result} locale="fr" />
+      <InstitutionResults result={result.institutions} locale="fr" />
+      <ServiceResults result={result.services} locale="fr" />
     </FrenchSourceGatedPage>
   );
 }
