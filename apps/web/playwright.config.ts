@@ -14,6 +14,7 @@ const managedWebServer =
 export default defineConfig({
   ...managedWebServer,
   fullyParallel: true,
+  workers: 2,
   projects: [
     {
       name: "chromium",

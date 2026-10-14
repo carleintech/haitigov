@@ -319,6 +319,7 @@
   .hg-history *,
   .hg-history *::before,
   .hg-history *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced motion must override authored smooth scrolling */
     scroll-behavior: auto !important;
   }
 }

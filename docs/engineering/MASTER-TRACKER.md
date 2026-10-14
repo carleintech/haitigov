@@ -6,7 +6,7 @@ Platform: HaitiGov
 
 ## Overall Engineering Progress
 
-30.4% (106 of 349 tracked items complete; 3 items blocked; 16 items in progress)
+31.2% (109 of 349 tracked items complete; 3 items blocked; 13 items in progress)
 
 ---
 
@@ -362,9 +362,9 @@ Platform: HaitiGov
 
 - [x] Next.js public application
 - [x] Homepage
-- [~] Government directory
-- [~] Institution pages
-- [~] Ministry pages
+- [x] Government directory
+- [x] Institution pages
+- [x] Ministry pages
 - [x] Service discovery
 - [~] Search
 - [~] News/announcements
@@ -486,6 +486,29 @@ Platform: HaitiGov
   verified records are shown, and source coverage, the broader directory, and
   manual accessibility review remain open. No institutional records or
   official status were invented.
+
+## Phase 5 Institution Directory Completion Gate — 2026-10-13
+
+- Completed the Kreyòl and French government directory, institution detail,
+  and ministry directory implementation boundary. All three experiences use
+  runtime-validated public API contracts and expose only `VERIFIED_CURRENT` or
+  visibly dated `VERIFIED_LEGACY` records; pending records remain private.
+- Confirmed all 21 API tests, 9 web unit tests, and 59 Chromium journeys pass.
+  The browser suite covers both directory languages, institution details,
+  ministry filters, responsive layouts, keyboard behavior, reduced motion,
+  and automated WCAG A/AA checks.
+- Capped Playwright at two workers after the uncapped six-worker run exhausted
+  local browser sessions. The deterministic two-worker run passed all tests.
+- The production monorepo build passed and generated all 27 current Next.js
+  routes. Secret scanning passed.
+- Added pinned transitive overrides for `shell-quote` 1.11.0 and
+  `source-map-js` 1.2.2 after the registry began reporting one critical and one
+  high advisory. A fresh high-severity dependency audit reports no known
+  vulnerabilities.
+- Completion means the source-gated software boundary is operational; it does
+  not convert unresolved institution candidates into verified records or imply
+  official Government of Haiti adoption. Manual accessibility review remains
+  tracked separately.
 
 ## Phase 5 Homepage Intro Playback — 2026-10-05
 
@@ -994,7 +1017,7 @@ Platform: HaitiGov
 
 # Current Assignment
 
-Progress is recorded through 2026-10-05:
+Progress is recorded through 2026-10-13:
 
 - Phase 0 is complete except for CODEOWNERS, which requires authoritative
   GitHub user/team handles.
@@ -1006,27 +1029,24 @@ Progress is recorded through 2026-10-05:
   primitives, registry components, and a neutral ministry identity framework.
   National branding records remain `REVIEW_REQUIRED`; no proposed asset is
   represented as official.
-- Phase 5 service discovery is API-backed and source-gated. Public institution
-  list and detail access is now restricted to verified current/legacy records,
-  and both ministry directory routes display searchable, verified API data with
-  prototype disclaimers. The broader directory and public portal remain in
-  progress.
+- Phase 5 service discovery is API-backed and source-gated. The bilingual
+  government directory, institution details, and ministry directory are
+  complete at the software boundary and remain restricted to verified
+  current/legacy records with prototype disclaimers. Other public-portal
+  capabilities remain in progress.
 
 Latest focused validation:
 
-- TypeScript checks passed for contracts, API, and web.
-- Contract build, API production build, and Next.js production build passed;
-  Next.js generated all 25 routes.
-- Focused API, web service-discovery, and contract tests passed (8, 9, and 2
-  tests respectively); Biome formatting passed.
-- Focused ESLint passed for the API and web changes. The contracts module
-  continues to report the existing deprecated `z.string().url()` call; it was
-  not changed as part of this assignment.
-- The 2026-10-05 Phase 5 service-discovery entry records a successful
-  high-severity dependency audit. No dependency was added in this assignment.
+- Repository lint and strict TypeScript passed before the browser stage. API
+  tests passed (21), web unit tests passed (9), and all Chromium journeys
+  passed (59) with the deterministic two-worker configuration.
+- The production monorepo build passed; Next.js generated all 27 current
+  routes and Storybook completed successfully. Secret scanning passed.
+- A fresh high-severity dependency audit passed with no known vulnerabilities
+  after pinning patched transitive releases for two newly published advisories.
 
-Next implementation target: resolve the deferred Phase 3 identity/taxonomy and
-named communal-section dataset items only after authoritative sources are
-provided. Do not advance past those source gates by inferring names or
-institutional status. The public portal remains in progress; accessibility
-manual review and incomplete source coverage also remain open.
+Next implementation target: continue the remaining unblocked Phase 5 public
+portal capabilities in sequence while keeping the deferred Phase 3
+identity/taxonomy and named communal-section items blocked until authoritative
+sources are available. Do not infer names or institutional status. Manual
+accessibility review and incomplete source coverage remain open.
