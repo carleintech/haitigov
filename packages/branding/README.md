@@ -64,6 +64,7 @@ page mockups in `docs/`. Reproduce these with
 The script records the exact source filenames and crop rectangles and writes
 WebP quality-85 derivatives to `apps/web/public/discover`; originals remain
 unchanged. It reuses the existing Next image processor without a new dependency.
+It rejects other working directories before creating or writing any artwork.
 
 These include the palace scene, ten department landscapes and conceptual marks,
 Explore heritage/culture/coast/food scenes, and history-era and portrait artwork.

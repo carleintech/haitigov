@@ -812,8 +812,29 @@ Platform: HaitiGov
   contracts, artwork preparation and documentation. Separate API/database
   work remains uncommitted; no database migration or backend deployment is
   authorized or performed by this web release.
-- [~] GitHub publication and dedicated Vercel deployment; record the actual
-  deployment result and live-browser verification after publication.
+- [x] Published web release `884e0c32155423343ec79ea24dfa803fe69bdf4f`
+  to `carleintech/haitigov` on `main`. Its Git-triggered Next.js production
+  deployment `dpl_4bVCnRwWhXyNqrWexLEL13cii93J` is READY (28-second build);
+  `https://haitigov.vercel.app` and existing HaitiGov domain aliases point to
+  the dedicated project. No KobKlein project or domain was modified.
+- Live Chromium verification passed on 20 public routes across both locales,
+  commune search/submission/filter/reset/pagination and five mobile layouts.
+  All requested routes returned 200, headings were visible, no horizontal
+  overflow occurred and no hydration/runtime page errors were captured.
+  The deployment-scoped Vercel error-log query returned no logs; persistent
+  log drains and alerting have not been verified.
+- Rollback remains available to the preceding READY deployment
+  `dpl_BVbuqEUJyuMRpdi9Rbed2FhPEHKk`. No rollback was performed.
+- GitHub release CI exposed a security-lint warning in artwork preparation.
+  The script now requires the repository-root working directory before its
+  literal output-directory creation; no security rule was disabled.
+  Root invocation regenerated identical artwork and focused ESLint passed.
+  Full dirty-workspace lint remains blocked by two unsafe-assignment errors
+  in separate, uncommitted announcement repository tests, outside this release.
+- The quality job now installs pinned Playwright Chromium and Linux system
+  dependencies before running public-page tests, matching the existing
+  design-system job. Remote CI and follow-up deployment verification remain
+  pending for this bounded release repair.
 - Node patch compliance, connected production API, verified content/media
   rights and identity approvals, manual accessibility and outstanding CI
   repair remain open. Deployment must not imply government adoption or

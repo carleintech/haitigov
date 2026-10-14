@@ -55,6 +55,9 @@ jobs:
       - name: Type check
         run: pnpm run typecheck
 
+      - name: Install Chromium for public-page tests
+        run: pnpm --filter @haitigov/web exec playwright install --with-deps chromium
+
       - name: Run unit tests
         run: pnpm run test
 

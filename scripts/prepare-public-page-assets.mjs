@@ -4,13 +4,16 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
+if (path.resolve(process.cwd()) !== path.resolve(root)) {
+  throw new Error("Run artwork preparation from the repository root.");
+}
 const require = createRequire(import.meta.url);
 const nextRequire = createRequire(
   require.resolve("next/package.json", { paths: [path.join(root, "apps", "web")] }),
 );
 const sharp = nextRequire("sharp");
 const output = path.join(root, "apps", "web", "public", "discover");
-await mkdir(output, { recursive: true });
+await mkdir("apps/web/public/discover", { recursive: true });
 
 async function crop(source, name, referenceWidth, box) {
   const image = sharp(path.join(root, "docs", source));
