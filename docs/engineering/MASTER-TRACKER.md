@@ -465,23 +465,8 @@ Platform: HaitiGov
 
 ## Phase 5 Verified Institution Directory Boundary — 2026-10-05
 
-- Restricted public institution list and detail queries to current or legacy
-  verified records. Pending and partially verified records cannot be retrieved
-  through public list filters or canonical-ID detail requests.
-- Shared contracts and OpenAPI metadata now expose only public verification
-  statuses; API regression tests cover rejection of non-public filters and
-  repository-level list/detail filtering.
-- Connected Kreyòl and French ministry directory pages to the verified public
-  institution API, with ministry-type filtering, search, and explicit
-  prototype/non-official notices.
-- Contract, API, and web TypeScript checks passed. Contract build, API
-  production build, and Next.js production build passed; Next.js generated all
-  25 routes.
-- Focused API, web service-discovery, and contract tests passed (8, 9, and 2
-  tests respectively). Biome formatting passed. Focused ESLint passed for the
-  API and web files; linting the touched contracts module still reports the
-  existing deprecated `z.string().url()` call at line 251. It was not changed
-  because it is unrelated to this work.
+              work.
+
 - The data-backed public directory remains incomplete: only appropriately
   verified records are shown, and source coverage, the broader directory, and
   manual accessibility review remain open. No institutional records or
@@ -689,20 +674,20 @@ Platform: HaitiGov
 ## Phase 5 Remaining Public-Page Visual Milestone — 2026-10-14
 
 - [x] Shared bilingual layouts aligned to the owner-supplied public-page
-  mockups: institution directory, department directory, all ten department
-  details, Explore Haiti, history, transparency and news.
+      mockups: institution directory, department directory, all ten department
+      details, Explore Haiti, history, transparency and news.
 - [x] Responsive illustrated heroes, navigation, cards, search/filter controls
-  and explicit prototype notices. Owner-mockup crops are reproducible using
-  `node scripts/prepare-public-page-assets.mjs`; provenance and production
-  rights limitations are recorded in `packages/branding/README.md`.
+      and explicit prototype notices. Owner-mockup crops are reproducible using
+      `node scripts/prepare-public-page-assets.mjs`; provenance and production
+      rights limitations are recorded in `packages/branding/README.md`.
 - [x] Canonical department identifiers, capitals, counts and commune membership
-  retained. Unknown department slugs return 404; language links preserve the
-  selected department. The schematic selector is not an authoritative GIS map.
+      retained. Unknown department slugs return 404; language links preserve the
+      selected department. The schematic selector is not an authoritative GIS map.
 - [x] Institution and news layouts preserve source-gated API responses and
-  explicit unavailable states. Loaded results support localized filtering,
-  sorting and pagination; news date filtering uses Haiti's local calendar.
+      explicit unavailable states. Loaded results support localized filtering,
+      sorting and pagination; news date filtering uses Haiti's local calendar.
 - [x] History citations and editorial caveats retained. Unverified population,
-  area, projects, announcements and media were not fabricated to match mockups.
+      area, projects, announcements and media were not fabricated to match mockups.
 - Validation passed: `pnpm format:check`, `pnpm exec biome lint .`,
   `pnpm --filter @haitigov/web lint`,
   `pnpm --filter @haitigov/web typecheck`,
@@ -717,21 +702,21 @@ Platform: HaitiGov
   corrections. `pnpm secrets:scan` and `git diff --check` passed. Desktop
   Explore and mobile Nord screenshots were reviewed with no horizontal overflow.
 - [x] Fixture-driven browser coverage of populated institution/news filters,
-  sorting and pagination: 14 Chromium tests passed across French and Haitian
-  Creole, including localized institution names, current/legacy separation,
-  category/filter synchronization, reset behavior, search submission, empty
-  results, partial-result notices and explicit API outages. News tests cover
-  source filters, chronology and both sides of Haiti's local midnight.
-  Populated mobile pages also passed automated WCAG checks and overflow checks.
+      sorting and pagination: 14 Chromium tests passed across French and Haitian
+      Creole, including localized institution names, current/legacy separation,
+      category/filter synchronization, reset behavior, search submission, empty
+      results, partial-result notices and explicit API outages. News tests cover
+      source filters, chronology and both sides of Haiti's local midnight.
+      Populated mobile pages also passed automated WCAG checks and overflow checks.
 - [x] Fixed a populated-news hydration regression: Node and Chromium resolve
-  unsupported `ht-HT` date formatting differently, which could replace the
-  search field during hydration and discard an entered query. Haitian Creole
-  publication labels now use explicit month names and Haiti-local calendar
-  parts; French labels retain their existing format. Unit regressions cover
-  all twelve months, year rollover, midnight boundaries and invalid timestamps.
-  All 14 populated-data browser tests passed after the fix with automatic
-  per-test assertions for zero hydration/runtime page errors and explicit
-  bilingual date-label assertions.
+      unsupported `ht-HT` date formatting differently, which could replace the
+      search field during hydration and discard an entered query. Haitian Creole
+      publication labels now use explicit month names and Haiti-local calendar
+      parts; French labels retain their existing format. Unit regressions cover
+      all twelve months, year rollover, midnight boundaries and invalid timestamps.
+      All 14 populated-data browser tests passed after the fix with automatic
+      per-test assertions for zero hydration/runtime page errors and explicit
+      bilingual date-label assertions.
 - Reproduce populated-data validation with
   `pnpm --filter @haitigov/web test:public-data`. This builds the web app and
   workspace dependencies, then runs the production server on loopback port
@@ -741,7 +726,7 @@ Platform: HaitiGov
   development server nor production configuration receives synthetic records.
   These tests do not verify a connected production API or authoritative data.
 - [ ] Verified GIS geometry, source-backed additional public content, approved
-  videos/slides with captions and rights, and manual accessibility review.
+      videos/slides with captions and rights, and manual accessibility review.
 - No dependencies were added. Existing Node patch-version mismatch,
   transitive source-map-js advisory and GitHub CI browser-install failure remain
   separate unresolved gates. No new commit, push or deployment was performed.
@@ -753,18 +738,18 @@ Platform: HaitiGov
 ## Phase 5 Commune Directory Milestone — 2026-10-14
 
 - [x] Replaced unavailable-registry placeholders at `/communes` and
-  `/fr/communes` with a shared Haitian Creole/French directory of all 149
-  canonical communes. Stable identifiers, department and arrondissement
-  relationships, verification status and individual IHSI source links are
-  preserved from the project registry.
+      `/fr/communes` with a shared Haitian Creole/French directory of all 149
+      canonical communes. Stable identifiers, department and arrondissement
+      relationships, verification status and individual IHSI source links are
+      preserved from the project registry.
 - [x] Accent/case-insensitive name, identifier and parent-territory search;
-  department filters; dependent arrondissement options; reset and explicit
-  empty states; nine cards per page with accessible pagination and result
-  counts. Parent/filter changes reset pagination, and department changes
-  clear the arrondissement selection.
+      department filters; dependent arrondissement options; reset and explicit
+      empty states; nine cards per page with accessible pagination and result
+      counts. Parent/filter changes reset pagination, and department changes
+      clear the arrondissement selection.
 - [x] Shared illustrated public layout, responsive commune cards, truthful
-  prototype/provenance notices and language links. Department links use
-  existing department pages; unimplemented commune-detail URLs are not exposed.
+      prototype/provenance notices and language links. Department links use
+      existing department pages; unimplemented commune-detail URLs are not exposed.
 - Validation passed: `pnpm --filter @haitigov/web lint`,
   `pnpm --filter @haitigov/web typecheck`,
   `pnpm --filter @haitigov/web exec vitest run tests/public-service-discovery.test.ts`
@@ -787,7 +772,7 @@ Platform: HaitiGov
   the desktop directory and mobile commune-card screenshots were reviewed.
   This validates local production rendering, not a deployed production service.
 - [ ] Commune detail pages, verified officials/local services, named communal
-  sections, authoritative GIS boundaries and manual accessibility review.
+      sections, authoritative GIS boundaries and manual accessibility review.
 - No dependencies were added, and no commit, push or deployment was performed.
   Existing Node patch compliance, transitive source-map-js advisory, GitHub CI
   browser installation and other production gates remain unresolved.
@@ -813,10 +798,10 @@ Platform: HaitiGov
   work remains uncommitted; no database migration or backend deployment is
   authorized or performed by this web release.
 - [x] Published web release `884e0c32155423343ec79ea24dfa803fe69bdf4f`
-  to `carleintech/haitigov` on `main`. Its Git-triggered Next.js production
-  deployment `dpl_4bVCnRwWhXyNqrWexLEL13cii93J` is READY (28-second build);
-  `https://haitigov.vercel.app` and existing HaitiGov domain aliases point to
-  the dedicated project. No KobKlein project or domain was modified.
+      to `carleintech/haitigov` on `main`. Its Git-triggered Next.js production
+      deployment `dpl_4bVCnRwWhXyNqrWexLEL13cii93J` is READY (28-second build);
+      `https://haitigov.vercel.app` and existing HaitiGov domain aliases point to
+      the dedicated project. No KobKlein project or domain was modified.
 - Live Chromium verification passed on 20 public routes across both locales,
   commune search/submission/filter/reset/pagination and five mobile layouts.
   All requested routes returned 200, headings were visible, no horizontal
@@ -847,14 +832,14 @@ Platform: HaitiGov
   used by this Vercel web deployment. Its findings remain an open gate, not
   suppressed or reported as a passing security check.
 - [x] Corrected assertions passed locally in both languages.
-  Validated release commit `f2883f61c3b56d3769f1a54fdb53922bbeee35f5`
-  passed remote Quality and build (formatting, lint, types, all unit tests,
-  89 Chromium journeys, production build and secret scan) and design-system
-  visual regression in CI run `38624149400`.
-  Its dedicated Next.js production deployment
-  `dpl_EzgCtTURcVsdrXxVwc9M7Jq5URDr` is READY (17-second build).
-  Final live smoke checks passed both commune and Explore routes; no
-  runtime/hydration page errors or deployment-scoped error logs were found.
+      Validated release commit `f2883f61c3b56d3769f1a54fdb53922bbeee35f5`
+      passed remote Quality and build (formatting, lint, types, all unit tests,
+      89 Chromium journeys, production build and secret scan) and design-system
+      visual regression in CI run `38624149400`.
+      Its dedicated Next.js production deployment
+      `dpl_EzgCtTURcVsdrXxVwc9M7Jq5URDr` is READY (17-second build).
+      Final live smoke checks passed both commune and Explore routes; no
+      runtime/hydration page errors or deployment-scoped error logs were found.
 - Node patch compliance, connected production API, verified content/media
   rights and identity approvals, manual accessibility and foundation-container
   vulnerability remediation remain open. Deployment must not imply government adoption or
@@ -865,9 +850,9 @@ Platform: HaitiGov
 ## History navigation follow-up
 
 - [x] Added localized `Istwa` / `Histoire` links after Explore in the homepage,
-  service catalog and shared public-page desktop and mobile navigation.
-  Removed the shared mobile menu's duplicate history entry and marked the
-  current history page in both navigation variants.
+      service catalog and shared public-page desktop and mobile navigation.
+      Removed the shared mobile menu's duplicate history entry and marked the
+      current history page in both navigation variants.
 - Validation passed: web lint and typecheck, focused Biome checks, 22 web unit
   tests, 30 Chromium history/homepage tests and the dependency-aware production
   web build. Navigation tests cover both languages at 320, 390, 1201 and 1440
@@ -878,7 +863,16 @@ Platform: HaitiGov
   Target verification confirmed `carleintech/haitigov` on `main` and the
   dedicated Vercel `haitigov` project (`prj_OJ8kP3udZKt6BJkS9PrqNjjcbxeB`).
   Only this navigation follow-up is included; unrelated API/database work
-  remains local. Deployment verification is pending publication.
+  remains local.
+- Published navigation commit `fd2dabb0bb2188b580652e62e486172ec4d597b2`
+  deployed READY to production as `dpl_6ppTiFChhm3GTT2BDuLZDrxrZ1TZ`
+  (25-second build). GitHub's Vercel commit status is successful.
+  Live Chromium smoke checks passed 12 homepage/service/institution navigation
+  journeys across both languages at 390 and 1440 pixels on
+  `https://haitigov.vercel.app`, including destination headings, overflow and
+  page runtime errors. Deployment-scoped error queries returned no logs.
+  Remote Quality and build and design-system visual regression both passed in
+  CI run `38644182211`. Log drains and alerting remain unverified.
   Existing production-readiness gates remain unchanged.
 
 ---
