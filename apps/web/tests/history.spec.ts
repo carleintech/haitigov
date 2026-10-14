@@ -27,6 +27,51 @@ const historyPages = [
 ] as const;
 
 for (const historyPage of historyPages) {
+  for (const width of [320, 390, 1201, 1440]) {
+    test(`${historyPage.locale} history navigation works across public headers at ${width.toString()}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      const errors: string[] = [];
+      page.on("pageerror", (error) => errors.push(error.message));
+      const french = historyPage.locale === "fr";
+      const label = french ? "Histoire" : "Istwa";
+      const paths = french
+        ? ["/fr", "/fr/services", "/fr/institutions", historyPage.path]
+        : ["/", "/services", "/institutions", historyPage.path];
+      for (const path of paths) {
+        await page.goto(path);
+        const mobile = width <= 1200;
+        if (mobile) {
+          await page.locator(".hg-portal-mobile-nav summary").click();
+        }
+        const navigation = page.locator(
+          mobile ? ".hg-portal-mobile-nav nav" : ".hg-portal-desktop-nav",
+        );
+        const history = navigation.getByRole("link", { name: label, exact: true });
+        await expect(history).toHaveCount(1);
+        await expect(history).toBeVisible();
+        await expect(history).toHaveAttribute("href", historyPage.path);
+        if (path === historyPage.path) {
+          await expect(history).toHaveAttribute("aria-current", "page");
+        }
+        const dimensions = await page.evaluate(() => ({
+          viewport: document.documentElement.clientWidth,
+          content: document.documentElement.scrollWidth,
+        }));
+        expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+        await history.focus();
+        await expect(history).toBeFocused();
+        await history.press("Enter");
+        await expect(page).toHaveURL(historyPage.path);
+        await expect(
+          page.getByRole("heading", { level: 1, name: historyPage.heading }),
+        ).toBeVisible();
+      }
+      expect(errors).toEqual([]);
+    });
+  }
+
   test(`${historyPage.locale} history page is bilingual, sourced, and bookmarkable`, async ({
     page,
   }) => {

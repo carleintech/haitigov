@@ -862,6 +862,27 @@ Platform: HaitiGov
 
 ---
 
+## History navigation follow-up
+
+- [x] Added localized `Istwa` / `Histoire` links after Explore in the homepage,
+  service catalog and shared public-page desktop and mobile navigation.
+  Removed the shared mobile menu's duplicate history entry and marked the
+  current history page in both navigation variants.
+- Validation passed: web lint and typecheck, focused Biome checks, 22 web unit
+  tests, 30 Chromium history/homepage tests and the dependency-aware production
+  web build. Navigation tests cover both languages at 320, 390, 1201 and 1440
+  pixels, keyboard activation, localized destinations, current-page state,
+  horizontal overflow and page runtime errors; existing automated accessibility
+  checks also passed.
+- The owner authorized commit and production publication on 2026-10-14.
+  Target verification confirmed `carleintech/haitigov` on `main` and the
+  dedicated Vercel `haitigov` project (`prj_OJ8kP3udZKt6BJkS9PrqNjjcbxeB`).
+  Only this navigation follow-up is included; unrelated API/database work
+  remains local. Deployment verification is pending publication.
+  Existing production-readiness gates remain unchanged.
+
+---
+
 # Phase 6 — Identity & Access Foundation
 
 - [ ] Authentication architecture

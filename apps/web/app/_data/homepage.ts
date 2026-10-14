@@ -59,6 +59,7 @@ export const homeCopy = {
     country: "Repiblik Ayiti",
     proposed: "Inisyativ dijital pwopoze",
     nav: ["Akèy", "Sèvis", "Enstitisyon", "Depatman", "Dekouvri Ayiti", "Transparans", "Nouvèl"],
+    navHistory: "Istwa",
     navigation: "Navigasyon prensipal",
     languages: "Chwazi lang",
     accessibility: "Aksesibilite",
@@ -154,6 +155,7 @@ export const homeCopy = {
   fr: {
     country: "République d’Haïti",
     proposed: "Initiative numérique proposée",
+    navHistory: "Histoire",
     nav: [
       "Accueil",
       "Services",

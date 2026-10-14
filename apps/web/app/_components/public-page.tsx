@@ -100,6 +100,7 @@ export function PublicShell({
     [text.nav[2], routes.institutions],
     [text.nav[3], routes.departments],
     [text.nav[4], routes.explore],
+    [text.navHistory, routes.history],
     [text.nav[5], routes.transparency],
     [text.nav[6], routes.news],
   ] as const;
@@ -167,11 +168,14 @@ export function PublicShell({
             <summary>{text.menu}</summary>
             <nav aria-label={text.navigation}>
               {navigation.map(([label, href]) => (
-                <a key={href} href={href}>
+                <a
+                  key={href}
+                  href={href}
+                  aria-current={href === publicPageHref(locale, page) ? "page" : undefined}
+                >
                   {label}
                 </a>
               ))}
-              <a href={routes.history}>{locale === "fr" ? "Histoire d’Haïti" : "Istwa Ayiti"}</a>
             </nav>
           </details>
         </div>
