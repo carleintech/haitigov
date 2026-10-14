@@ -109,7 +109,7 @@ export async function PublicHomepage({ locale }: Readonly<{ locale: HomeLocale }
     { label: text.nav[1], href: routes.services },
     { label: text.nav[2], href: routes.institutions },
     { label: text.nav[3], href: routes.departments },
-    { label: text.nav[4], href: "#explore" },
+    { label: text.nav[4], href: routes.explore },
     { label: text.nav[5], href: routes.transparency },
     { label: text.nav[6], href: routes.news },
   ];

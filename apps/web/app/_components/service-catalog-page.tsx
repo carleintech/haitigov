@@ -166,7 +166,7 @@ export async function ServiceCatalogPage({
     { label: text.nav[1], href: routes.services, current: true },
     { label: text.nav[2], href: routes.institutions },
     { label: text.nav[3], href: routes.departments },
-    { label: locale === "ht" ? "Istwa Ayiti" : "Histoire d’Haïti", href: routes.history },
+    { label: text.nav[4], href: routes.explore },
     { label: text.nav[5], href: routes.transparency },
     { label: text.nav[6], href: routes.news },
   ];

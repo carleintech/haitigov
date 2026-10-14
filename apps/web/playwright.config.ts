@@ -28,6 +28,7 @@ export default defineConfig({
   reporter: process.env.CI === "true" ? [["line"], ["html", { open: "never" }]] : "list",
   testDir: "./tests",
   testMatch: "**/*.spec.ts",
+  testIgnore: "**/*.fixture.spec.ts",
   use: {
     baseURL: "http://127.0.0.1:3100",
     locale: "ht-HT",

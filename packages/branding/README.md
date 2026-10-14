@@ -56,6 +56,25 @@ a verified interactive map, or transactional services.
 illustrations and identity assets still requires authoritative provenance,
 rights review, accessible alternatives, and approval.
 
+## Public-page mockup derivatives
+
+The remaining public-page layouts use decorative crops from the owner's supplied
+page mockups in `docs/`. Reproduce these with
+`node scripts/prepare-public-page-assets.mjs` from the repository root.
+The script records the exact source filenames and crop rectangles and writes
+WebP quality-85 derivatives to `apps/web/public/discover`; originals remain
+unchanged. It reuses the existing Next image processor without a new dependency.
+
+These include the palace scene, ten department landscapes and conceptual marks,
+Explore heritage/culture/coast/food scenes, and history-era and portrait artwork.
+They are prototype illustrations, not verified photographs, official department
+seals, evidence of current conditions, or proof of government adoption. Visible
+localized notices identify that limitation. History claims retain their separate
+source citations; artwork does not establish factual provenance.
+Production publication still requires independent rights and identity review.
+Missing videos, slides, captions and documentary media remain pending rather
+than being simulated.
+
 ## Retained historical photography
 
 The retained `apps/web/public/citadelle-aerial.webp` asset is derived from

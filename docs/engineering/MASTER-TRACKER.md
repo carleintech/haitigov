@@ -686,6 +686,141 @@ Platform: HaitiGov
 
 ---
 
+## Phase 5 Remaining Public-Page Visual Milestone — 2026-10-14
+
+- [x] Shared bilingual layouts aligned to the owner-supplied public-page
+  mockups: institution directory, department directory, all ten department
+  details, Explore Haiti, history, transparency and news.
+- [x] Responsive illustrated heroes, navigation, cards, search/filter controls
+  and explicit prototype notices. Owner-mockup crops are reproducible using
+  `node scripts/prepare-public-page-assets.mjs`; provenance and production
+  rights limitations are recorded in `packages/branding/README.md`.
+- [x] Canonical department identifiers, capitals, counts and commune membership
+  retained. Unknown department slugs return 404; language links preserve the
+  selected department. The schematic selector is not an authoritative GIS map.
+- [x] Institution and news layouts preserve source-gated API responses and
+  explicit unavailable states. Loaded results support localized filtering,
+  sorting and pagination; news date filtering uses Haiti's local calendar.
+- [x] History citations and editorial caveats retained. Unverified population,
+  area, projects, announcements and media were not fabricated to match mockups.
+- Validation passed: `pnpm format:check`, `pnpm exec biome lint .`,
+  `pnpm --filter @haitigov/web lint`,
+  `pnpm --filter @haitigov/web typecheck`,
+  `pnpm --filter @haitigov/web exec vitest run tests/public-service-discovery.test.ts`
+  (20 tests), `pnpm test:unit` (15 tests), and
+  `pnpm exec turbo run build --filter=@haitigov/web...` (49 generated pages).
+  With `PLAYWRIGHT_REUSE_SERVER=true`,
+  `pnpm --filter @haitigov/web exec playwright test tests/public-pages.spec.ts tests/history.spec.ts tests/service-catalog.spec.ts tests/accessibility.spec.ts`
+  passed 64 Chromium tests, including both locales, all department details,
+  responsive overflow, image decoding and automated WCAG checks.
+  A separate keyboard-scroll regression also passed after the final semantic
+  corrections. `pnpm secrets:scan` and `git diff --check` passed. Desktop
+  Explore and mobile Nord screenshots were reviewed with no horizontal overflow.
+- [x] Fixture-driven browser coverage of populated institution/news filters,
+  sorting and pagination: 14 Chromium tests passed across French and Haitian
+  Creole, including localized institution names, current/legacy separation,
+  category/filter synchronization, reset behavior, search submission, empty
+  results, partial-result notices and explicit API outages. News tests cover
+  source filters, chronology and both sides of Haiti's local midnight.
+  Populated mobile pages also passed automated WCAG checks and overflow checks.
+- [x] Fixed a populated-news hydration regression: Node and Chromium resolve
+  unsupported `ht-HT` date formatting differently, which could replace the
+  search field during hydration and discard an entered query. Haitian Creole
+  publication labels now use explicit month names and Haiti-local calendar
+  parts; French labels retain their existing format. Unit regressions cover
+  all twelve months, year rollover, midnight boundaries and invalid timestamps.
+  All 14 populated-data browser tests passed after the fix with automatic
+  per-test assertions for zero hydration/runtime page errors and explicit
+  bilingual date-label assertions.
+- Reproduce populated-data validation with
+  `pnpm --filter @haitigov/web test:public-data`. This builds the web app and
+  workspace dependencies, then runs the production server on loopback port
+  3210 against a synthetic API on loopback port 3211. Playwright owns both test
+  servers, refuses occupied ports and stops them after the suite. Fixture tests
+  are excluded from the normal development-server suite; neither the ordinary
+  development server nor production configuration receives synthetic records.
+  These tests do not verify a connected production API or authoritative data.
+- [ ] Verified GIS geometry, source-backed additional public content, approved
+  videos/slides with captions and rights, and manual accessibility review.
+- No dependencies were added. Existing Node patch-version mismatch,
+  transitive source-map-js advisory and GitHub CI browser-install failure remain
+  separate unresolved gates. No new commit, push or deployment was performed.
+- This visual milestone does not complete Phase 5 or change the tracked
+  349-item baseline; full data and production-readiness gates remain open.
+
+---
+
+## Phase 5 Commune Directory Milestone — 2026-10-14
+
+- [x] Replaced unavailable-registry placeholders at `/communes` and
+  `/fr/communes` with a shared Haitian Creole/French directory of all 149
+  canonical communes. Stable identifiers, department and arrondissement
+  relationships, verification status and individual IHSI source links are
+  preserved from the project registry.
+- [x] Accent/case-insensitive name, identifier and parent-territory search;
+  department filters; dependent arrondissement options; reset and explicit
+  empty states; nine cards per page with accessible pagination and result
+  counts. Parent/filter changes reset pagination, and department changes
+  clear the arrondissement selection.
+- [x] Shared illustrated public layout, responsive commune cards, truthful
+  prototype/provenance notices and language links. Department links use
+  existing department pages; unimplemented commune-detail URLs are not exposed.
+- Validation passed: `pnpm --filter @haitigov/web lint`,
+  `pnpm --filter @haitigov/web typecheck`,
+  `pnpm --filter @haitigov/web exec vitest run tests/public-service-discovery.test.ts`
+  (22 tests), `pnpm test:unit` (15 tests), `pnpm exec biome lint .`,
+  `pnpm format:check`, `pnpm secrets:scan`, and
+  `pnpm exec turbo run build --filter=@haitigov/web...` (49 generated pages).
+  With `PLAYWRIGHT_REUSE_SERVER=true`,
+  `pnpm --filter @haitigov/web exec playwright test tests/public-pages.spec.ts`
+  passed 30 Chromium tests. A final
+  `pnpm --filter @haitigov/web exec playwright test tests/public-pages.spec.ts --grep 'commune|/communes'`
+  passed six tests after the component lint corrections.
+- Browser regressions cover all 149 identifiers across 17 pages in canonical
+  order, both locales, dependent filters, pagination resets, search submission,
+  empty/reset states, source/department links and language navigation. Mobile
+  commune routes passed automated WCAG checks and horizontal-overflow checks.
+- Production-browser verification used an isolated Next production server on
+  loopback port 3214 and Chromium with `ht-HT` locale. Both routes returned 200,
+  search/filter/pagination interactions passed, and no hydration/runtime page
+  errors or desktop/mobile overflow were observed. Fully loaded desktop artwork,
+  the desktop directory and mobile commune-card screenshots were reviewed.
+  This validates local production rendering, not a deployed production service.
+- [ ] Commune detail pages, verified officials/local services, named communal
+  sections, authoritative GIS boundaries and manual accessibility review.
+- No dependencies were added, and no commit, push or deployment was performed.
+  Existing Node patch compliance, transitive source-map-js advisory, GitHub CI
+  browser installation and other production gates remain unresolved.
+  Commune discovery remains in progress; this bounded milestone does not mark
+  Phase 5 complete or change the 349-item baseline.
+
+---
+
+### Public-page release authorization — 2026-10-14
+
+- Owner explicitly requested commit and Vercel deployment of the completed
+  public-page work. Target remains `carleintech/haitigov` on `main` and the
+  dedicated Vercel project `prj_OJ8kP3udZKt6BJkS9PrqNjjcbxeB` (`haitigov`).
+- Pre-release validation passed: web lint/typecheck, repository formatting,
+  secret scanning, whitespace checks, 12 shared-contract unit tests and
+  `pnpm --filter @haitigov/web test:public-data` (production build and
+  14 fixture-driven Chromium tests).
+- Current `pnpm audit --prod --audit-level high` reports no known
+  vulnerabilities, superseding the earlier local source-map-js audit result
+  for this check. No dependency versions were changed in this release.
+- Release scope is the proposed public web experience, its shared announcement
+  contracts, artwork preparation and documentation. Separate API/database
+  work remains uncommitted; no database migration or backend deployment is
+  authorized or performed by this web release.
+- [~] GitHub publication and dedicated Vercel deployment; record the actual
+  deployment result and live-browser verification after publication.
+- Node patch compliance, connected production API, verified content/media
+  rights and identity approvals, manual accessibility and outstanding CI
+  repair remain open. Deployment must not imply government adoption or
+  completion of production-readiness gates.
+
+---
+
 # Phase 6 — Identity & Access Foundation
 
 - [ ] Authentication architecture

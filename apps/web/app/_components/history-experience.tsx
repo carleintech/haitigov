@@ -1,4 +1,4 @@
-import { GovernmentFooter, GovernmentHeader, PublicInformationBanner } from "@haitigov/ui";
+import { PrototypeNotice, PublicArt, PublicHero, PublicShell } from "./public-page.js";
 import "./history-experience.css";
 
 type HistoryLocale = "ht" | "fr";
@@ -61,6 +61,11 @@ const sources = [
     label: "BINUH — Secretary-General’s report on the situation in Haiti, 14 July 2026 (PDF)",
     href: "https://binuh.unmissions.org/sites/default/files/2026-07/SG%20Report%20on%20the%20situation%20in%20Haiti%20%2814%20July%202026%29.pdf",
   },
+  {
+    id: "source-unesco",
+    label: "UNESCO — Parc national historique : Citadelle, Sans-Souci, Ramiers",
+    href: "https://whc.unesco.org/en/list/180/",
+  },
 ] as const;
 
 function Citation({ sourceId, children }: Readonly<{ sourceId: string; children: string }>) {
@@ -73,8 +78,6 @@ function Citation({ sourceId, children }: Readonly<{ sourceId: string; children:
 
 export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }>) {
   const french = locale === "fr";
-  const homeHref = french ? "/fr" : "/";
-  const pageHref = french ? "/fr/histoire" : "/history";
   const copy = french
     ? {
         navHome: "Accueil",
@@ -382,23 +385,31 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
       };
 
   return (
-    <>
-      <GovernmentHeader homeHref={homeHref} navigationLabel={copy.primaryNavigation}>
-        <a href={homeHref}>{copy.navHome}</a>
-        <a aria-current="page" href={pageHref}>
-          {copy.navHistory}
-        </a>
-        <a href={french ? "/history" : "/fr/histoire"} lang={french ? "ht" : "fr"}>
-          {copy.switchLanguage}
-        </a>
-      </GovernmentHeader>
-      <main className="hg-container hg-history" id="main-content" lang={locale}>
-        <PublicInformationBanner>{copy.banner}</PublicInformationBanner>
-        <header className="hg-history-hero">
-          <p className="hg-eyebrow">{copy.eyebrow}</p>
-          <h1>{copy.title}</h1>
+    <PublicShell locale={locale} page="history">
+      <PublicHero
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        description={
+          french
+            ? "Une terre de liberté, un peuple de courage. Découvrez les grandes étapes d’une histoire qui commence avant 1492."
+            : "Yon tè libète, yon pèp kouraj. Dekouvri gwo etap yon istwa ki kòmanse anvan 1492."
+        }
+        image="/homepage-citadelle.webp"
+      >
+        <div className="hg-public-pills">
+          <a href="#chronology">{copy.timelineLink}</a>
+          <a href="#figures">{copy.figuresLink}</a>
+        </div>
+      </PublicHero>
+      <PrototypeNotice locale={locale} />
+      <div className="hg-container hg-history">
+        <details className="hg-history-editorial">
+          <summary>
+            {french ? "À propos de ce parcours historique" : "Konsènan pakou istorik sa a"}
+          </summary>
+          <p>{copy.banner}</p>
           <p>{copy.intro}</p>
-        </header>
+        </details>
         <nav className="hg-history-toc" aria-label={copy.contents}>
           <strong>{copy.contents}</strong>
           <a href="#chronology">{copy.timelineLink}</a>
@@ -414,13 +425,17 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
             <p>{copy.timelineIntro}</p>
           </div>
           <ol className="hg-history-timeline">
-            {copy.timeline.map((item) => (
+            {copy.timeline.map((item, index) => (
               <li className="hg-history-event" key={item.date}>
+                {index < 6 ? <PublicArt src={`/discover/era-${index.toString()}.webp`} /> : null}
                 <time className="hg-history-event__date">{item.date}</time>
                 <article className="hg-history-event__content">
                   <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                  <Citation sourceId={item.source}>{item.sourceLabel}</Citation>
+                  <details>
+                    <summary>{french ? "Lire ce repère" : "Li repè sa a"}</summary>
+                    <p>{item.body}</p>
+                    <Citation sourceId={item.source}>{item.sourceLabel}</Citation>
+                  </details>
                 </article>
               </li>
             ))}
@@ -436,9 +451,46 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
           <div className="hg-history-figures">
             {copy.figures.map((figure) => (
               <article className="hg-history-figure" key={figure.name}>
+                <PublicArt
+                  src={`/discover/figure-${figure.name === "Toussaint Louverture" ? "0" : figure.name === "Jean-Jacques Dessalines" ? "1" : "4"}.webp`}
+                />
                 <h3>{figure.name}</h3>
                 <p>{figure.text}</p>
                 <Citation sourceId={figure.source}>{figure.sourceLabel}</Citation>
+              </article>
+            ))}
+          </div>
+          <p className="hg-public-muted">
+            {french
+              ? "Portraits interprétatifs fournis avec la maquette, pas des portraits documentaires authentifiés."
+              : "Pòtrè entèpretatif ki vini ak makèt la, se pa pòtrè dokimantè otantifye."}
+          </p>
+        </section>
+
+        <section className="hg-history-section" id="monuments" aria-labelledby="monuments-heading">
+          <div className="hg-history-section-heading">
+            <h2 id="monuments-heading">{french ? "Mémoire & patrimoine" : "Memwa ak eritaj"}</h2>
+            <p>
+              {french
+                ? "Le Parc national historique, un ensemble inscrit au patrimoine mondial."
+                : "Pak nasyonal istorik la, yon ansanm ki sou lis eritaj mondyal."}
+            </p>
+          </div>
+          <div className="hg-public-grid">
+            {["Citadelle", "Sans-Souci", "Ramiers"].map((name, index) => (
+              <article className="hg-public-card" key={name}>
+                {index < 2 ? (
+                  <PublicArt src={`/discover/monument-${index.toString()}.webp`} />
+                ) : null}
+                <div className="hg-public-card__body">
+                  <h3>{name}</h3>
+                  <p>
+                    {french
+                      ? "Ressource historique UNESCO. Illustration thématique, non documentaire."
+                      : "Resous istorik UNESCO. Ilistrasyon tematik, pa dokimantè."}
+                  </p>
+                  <Citation sourceId="source-unesco">UNESCO</Citation>
+                </div>
               </article>
             ))}
           </div>
@@ -487,13 +539,7 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
           </ol>
           <p className="hg-history-coverage">{copy.coverageNote}</p>
         </section>
-      </main>
-      <GovernmentFooter navigationLabel={copy.footerNavigation}>
-        <a href={homeHref}>{copy.backHome}</a>
-        <a href={french ? "/history" : "/fr/histoire"} lang={french ? "ht" : "fr"}>
-          {copy.switchLanguage}
-        </a>
-      </GovernmentFooter>
-    </>
+      </div>
+    </PublicShell>
   );
 }

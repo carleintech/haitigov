@@ -9,6 +9,7 @@
     "lint": "eslint . --max-warnings=0",
     "test": "vitest run tests/public-service-discovery.test.ts && playwright test",
     "test:accessibility": "playwright test tests/accessibility.spec.ts",
+    "test:public-data": "turbo run build --filter=@haitigov/web... && playwright test --config tests/playwright.public-data.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

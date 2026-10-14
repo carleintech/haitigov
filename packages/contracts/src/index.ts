@@ -36,5 +36,6 @@ export interface HealthCheck {
   readonly version: string;
 }
 
+export * from "./announcements.js";
 export * from "./institutions.js";
 export * from "./services.js";
