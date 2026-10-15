@@ -892,6 +892,35 @@ Platform: HaitiGov
 
 ---
 
+## First history-page media montage — 2026-10-14
+
+- [x] Create the first "Videyo ak dyaporama" film from all 41 owner-supplied
+  images and the supplied Haiti Cherie soundtrack. Owner confirmed public-use
+  permission and identified the recording as instrumental, without words.
+- Reproducible 211-second 720p H.264/AAC montage, full-image presentation,
+  preserved watermarks, bilingual captions and timecoded visual transcript.
+  Native controls, no autoplay, downloadable media and explicit load errors.
+- Supplied marks, seals, locations and nine conceptual department flags are
+  not authenticated or presented as official. Visible notices are embedded
+  throughout the film and beside the player; no missing flag was fabricated.
+- Validation passed: focused Biome/ESLint checks, web TypeScript, 22 web unit
+  tests and production web build. All 14 history Playwright tests passed,
+  including bilingual accessibility, responsive navigation, playback, captions,
+  seeking, transcript and media errors. The four media tests also passed three
+  repetitions each (12 runs), including errors occurring before hydration.
+- FFprobe verified 211 seconds, 1280x720 H.264 video and AAC audio. All 41
+  image hashes and the soundtrack hash matched the source inventory; 43 timed
+  captions/transcript entries include the opening and closing titles. Decoded
+  frames were visually reviewed. Changed-text secret scanning and diff checks
+  passed; connected Next runtime reported no errors.
+- Owner authorized committing and publishing this montage on 2026-10-14.
+  Publication targets only `carleintech/haitigov` and its dedicated `haitigov`
+  Vercel project; deployment and live verification are pending. Independent
+  rights/identity review, manual accessibility review, the required Node patch
+  upgrade and other production gates remain open.
+
+---
+
 # Phase 6 — Identity & Access Foundation
 
 - [ ] Authentication architecture

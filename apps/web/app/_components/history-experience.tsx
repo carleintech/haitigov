@@ -1,3 +1,5 @@
+import historyMedia from "../_data/history-media.json" with { type: "json" };
+import { HistoryVideoPlayer } from "./history-video-player.js";
 import { PrototypeNotice, PublicArt, PublicHero, PublicShell } from "./public-page.js";
 import "./history-experience.css";
 
@@ -223,7 +225,7 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
         ],
         mediaTitle: "Vidéo et diaporamas",
         mediaBody:
-          "Aucune vidéo ni aucun diaporama n’est publié pour le moment. Ces formats compléteront les textes — ils ne les remplaceront pas — et devront inclure les sources, les droits d’utilisation, des sous-titres, une transcription, des commandes au clavier et aucune lecture automatique.",
+          "Notre premier montage réunit les 41 images fournies par le propriétaire, accompagnées de la musique instrumentale Haiti Cherie. Une invitation visuelle à découvrir Haïti, en complément des textes historiques sourcés.",
         sourcesTitle: "Sources et méthode",
         sourcesIntro:
           "Les sources ci-dessous servent de points de départ; elles ne remplacent pas une revue historique indépendante. Elles reflètent aussi le point de vue de leurs auteurs et institutions.",
@@ -375,7 +377,7 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
         ],
         mediaTitle: "Videyo ak dyaporama",
         mediaBody:
-          "Nou poko pibliye videyo ni dyaporama. Yo pral konplete tèks yo, se pa ranplase yo; fòk yo gen sous, dwa itilizasyon, soutit, transkripsyon, kontwòl klavye, epi yo pa dwe jwe poukont yo.",
+          "Premye montaj nou an rasanble tout 41 imaj pwopriyetè a bay yo, ak mizik enstrimantal Haiti Cherie. Yon envitasyon vizyèl pou dekouvri Ayiti, ki konplete tèks istorik ki gen sous yo.",
         sourcesTitle: "Sous ak metòd",
         sourcesIntro:
           "Sous ki anba yo se pwen depa; yo pa ranplase yon verifikasyon istorik endepandan. Yo reflete tou opinyon otè ak enstitisyon ki pibliye yo.",
@@ -522,6 +524,54 @@ export function HistoryExperience({ locale }: Readonly<{ locale: HistoryLocale }
           <p className="hg-eyebrow">{copy.mediaLink}</p>
           <h2 id="media-title">{copy.mediaTitle}</h2>
           <p>{copy.mediaBody}</p>
+          <figure className="hg-history-film">
+            <HistoryVideoPlayer locale={locale} />
+            <figcaption>
+              <strong>{french ? "Haïti en images" : "Ayiti nan imaj"}</strong>
+              <span>
+                {french
+                  ? "3 min 31 s · 41 images · Musique : Haiti Cherie"
+                  : "3 min 31 s · 41 imaj · Mizik: Haiti Cherie"}
+              </span>
+            </figcaption>
+          </figure>
+          <p className="hg-history-coverage" id="history-video-notice">
+            {french
+              ? "Montage prototype, non documentaire. Le propriétaire a confirmé les droits d’utilisation publique des images et de la musique le 14 octobre 2026; cette déclaration n’est pas une vérification indépendante. Les lieux, dates, marques, sceaux et drapeaux départementaux fournis ne sont pas authentifiés. Leur présence ne prouve ni statut officiel, ni affiliation institutionnelle, ni adoption gouvernementale."
+              : "Montaj pwototip, pa dokimantè. Pwopriyetè a konfime dwa itilizasyon piblik imaj yo ak mizik la nan dat 14 oktòb 2026; deklarasyon sa a pa yon verifikasyon endepandan. Kote, dat, mak, so ak drapo depatmantal yo pa otantifye. Prezans yo pa prèv estati ofisyèl, afilyasyon enstitisyonèl oswa adopsyon gouvènman an."}
+          </p>
+          <p>
+            <a href="/history-media/ayiti-nan-imaj.mp4" download>
+              {french ? "Télécharger la vidéo MP4" : "Telechaje videyo MP4 la"}
+            </a>
+            {" · "}
+            <a href={`/history-media/${locale}.vtt`} download>
+              {french ? "Télécharger les sous-titres" : "Telechaje soutit yo"}
+            </a>
+          </p>
+          <details className="hg-history-transcript">
+            <summary>
+              {french
+                ? "Transcription et description des images"
+                : "Transkripsyon ak deskripsyon imaj yo"}
+            </summary>
+            <p>
+              {french
+                ? "Musique instrumentale pendant tout le montage, sans narration ni paroles selon le propriétaire. Chaque image est présentée pendant cinq secondes avec des fondus. Les titres d’ouverture et de fin durent trois secondes. Les filigranes des sources sont conservés."
+                : "Mizik enstrimantal pandan tout montaj la, san narasyon ni pawòl dapre pwopriyetè a. Chak imaj parèt pandan senk segonn ak tranzisyon dous. Tit kòmansman ak tit fen yo dire twa segonn. Filigràn sous yo konsève."}
+            </p>
+            <ol>
+              {historyMedia.slides.map((slide) => (
+                <li key={slide.start}>
+                  <strong>
+                    {Math.floor(slide.start / 60)}:{(slide.start % 60).toString().padStart(2, "0")}
+                  </strong>
+                  {" — "}
+                  {french ? slide.fr : slide.ht}
+                </li>
+              ))}
+            </ol>
+          </details>
         </section>
 
         <section className="hg-history-sources" aria-labelledby="sources-title">

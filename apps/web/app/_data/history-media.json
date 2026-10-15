@@ -1,0 +1,352 @@
+{
+  "duration": 211,
+  "imageCount": 41,
+  "rightsConfirmation": "Owner confirmed public-use permission on 2026-10-14; not independently verified.",
+  "soundtrack": "Haiti_Cherie.mp3",
+  "soundtrackSha256": "4ffdcc12ddcc9a73280d77a239ac3fafb05d20882790b19e0cbe998a8eb7a000",
+  "audioDescription": "Owner identified recording as instrumental, without lyrics or speech.",
+  "slides": [
+    {
+      "source": null,
+      "ht": "Ayiti nan imaj",
+      "fr": "Haïti en images",
+      "start": 0,
+      "end": 3
+    },
+    {
+      "source": "a (1).jpg",
+      "ht": "Vil bò lanmè ak mòn",
+      "fr": "Ville côtière et montagnes",
+      "start": 3,
+      "end": 8,
+      "sha256": "b25ba98e8778f0b38fc2afec014be3a1faa6c507ab0f34d02e4071dcd2678408"
+    },
+    {
+      "source": "a (1).webp",
+      "ht": "Jaden an teras",
+      "fr": "Cultures en terrasses",
+      "start": 8,
+      "end": 13,
+      "sha256": "63a1fc17100812bcc975dc4708c2342e657ec204a5b39bb71fd8e64339645f84"
+    },
+    {
+      "source": "a (2).jpg",
+      "ht": "Men k ap kenbe grenn koulè lò",
+      "fr": "Mains tenant des grains dorés",
+      "start": 13,
+      "end": 18,
+      "sha256": "09723594cb1d73bf317f9ee2cf9de274324934f30702c3187370c876238c3d7b"
+    },
+    {
+      "source": "a (2).webp",
+      "ht": "Moun k ap travay tè",
+      "fr": "Personnes travaillant la terre",
+      "start": 18,
+      "end": 23,
+      "sha256": "6a51348d1e3d1b536e4b32a30c66410d45827dba5dea2461e3eb3d95d8206b76"
+    },
+    {
+      "source": "a (3).jpg",
+      "ht": "Legliz wouj ak yon gwo kay won",
+      "fr": "Église rouge et son clocher",
+      "start": 23,
+      "end": 28,
+      "sha256": "2d3c667a609350e4893525595a7cbfa5048bda91e5af6ce0328bce9bb88fbddd"
+    },
+    {
+      "source": "a (3).webp",
+      "ht": "Yon plat diri",
+      "fr": "Un plat de riz",
+      "start": 28,
+      "end": 33,
+      "sha256": "7a06d8d254e92e43dced1cbbf92d13f5279cbb39707f53211fc742925e2d0a45"
+    },
+    {
+      "source": "a (4).jpg",
+      "ht": "Yon plat manje ak yon nap kolore",
+      "fr": "Un plat sur une nappe colorée",
+      "start": 33,
+      "end": 38,
+      "sha256": "3fdb27f4083c83207d525659976fb88b684b641af1775abb165aae239d164e01"
+    },
+    {
+      "source": "a (4).webp",
+      "ht": "Yon pisin bò lanmè",
+      "fr": "Une piscine en bord de mer",
+      "start": 38,
+      "end": 43,
+      "sha256": "9895de2c8ae3bbb9bc7e022296e32b83e431e003ec6fbc6ad0c26b9af7f1e4f7"
+    },
+    {
+      "source": "a (5).jpg",
+      "ht": "Drapo ble ak wouj ak yon anblèm",
+      "fr": "Drapeau bleu et rouge avec un emblème",
+      "start": 43,
+      "end": 48,
+      "sha256": "81c21c01315bdcef0ec6e3eee0944d0456b75f099909458847b9f9cad0f41a16"
+    },
+    {
+      "source": "a (5).webp",
+      "ht": "Kaskad nan yon peyizaj vèt",
+      "fr": "Cascade dans un paysage verdoyant",
+      "start": 48,
+      "end": 53,
+      "sha256": "d097b687952540378c829108b2e61b845ac8917a30e7e144ce47cc09c8c245d1"
+    },
+    {
+      "source": "a (6).jpg",
+      "ht": "Yon fò sou tèt mòn",
+      "fr": "Une forteresse au sommet d’une montagne",
+      "start": 53,
+      "end": 58,
+      "sha256": "9a59578aba73c2345aa308e79a6db36c47f65208d68a8625e5a18f2d5739fc2b"
+    },
+    {
+      "source": "a (6).webp",
+      "ht": "Yon drapo k ap flote nan syèl la",
+      "fr": "Un drapeau flottant dans le ciel",
+      "start": 58,
+      "end": 63,
+      "sha256": "ee6048f8c9b3d97bb15e1307e586933f92db674902bba0634c7232652bf4c492"
+    },
+    {
+      "source": "a (7).jpg",
+      "ht": "Kaskad ak yon basen dlo",
+      "fr": "Cascades et bassin",
+      "start": 63,
+      "end": 68,
+      "sha256": "ab60d2a3097ac8b17fba84831856d87c2fa873ae9993031116777b4bcf5edbb2"
+    },
+    {
+      "source": "a (7).webp",
+      "ht": "Yon zile ak dlo ble",
+      "fr": "Une île entourée d’eau bleue",
+      "start": 68,
+      "end": 73,
+      "sha256": "79c4c910dc1b1737997d8015b2b0b099320de214d6ff16861e9cd2ca190bc1ab"
+    },
+    {
+      "source": "a (8).jpg",
+      "ht": "Yon plas ak yon legliz wouj",
+      "fr": "Une place et une église rouge",
+      "start": 73,
+      "end": 78,
+      "sha256": "6ad671a72b862f48cfabc8b09961d7582b619f3e1ae904175d8f13df02c00d32"
+    },
+    {
+      "source": "a (9).jpg",
+      "ht": "Jaden ak mòn nan fon an",
+      "fr": "Champs avec des montagnes à l’horizon",
+      "start": 78,
+      "end": 83,
+      "sha256": "7c9a3ff6358b1c172e7782acf0b6af5d8264863482441e7ae376d99edb6a1022"
+    },
+    {
+      "source": "a (10).jpg",
+      "ht": "Yon gwo wòch bò lanmè",
+      "fr": "Un grand rocher en bord de mer",
+      "start": 83,
+      "end": 88,
+      "sha256": "a9cc7ca123a57912a012b3fdd80bac044927f10639656c173027a04a19725931"
+    },
+    {
+      "source": "a (11).jpg",
+      "ht": "Yon plat ak vyann ak legim",
+      "fr": "Un plat de viande et de légumes",
+      "start": 88,
+      "end": 93,
+      "sha256": "bab3ac1c439185241239d7f91b6e1c07203c14147de7ffa21633521909d56abb"
+    },
+    {
+      "source": "a (12).jpg",
+      "ht": "Ilistrasyon yon fanm k ap koud yon drapo",
+      "fr": "Illustration d’une femme cousant un drapeau",
+      "start": 93,
+      "end": 98,
+      "sha256": "339343f2aff0341d984d4cd26612522632a65e92a555f56ccadcfced24442ea4"
+    },
+    {
+      "source": "a (13).jpg",
+      "ht": "Kay kolore nan yon vil",
+      "fr": "Maisons colorées dans une ville",
+      "start": 98,
+      "end": 103,
+      "sha256": "9a69d1ee7e1a5c1835358e057904f6eb4a9807fbd5d77014e811a42d38d4ab0b"
+    },
+    {
+      "source": "b (1).jpeg",
+      "ht": "Konpozisyon anblèm ak tèks sou drapo a",
+      "fr": "Composition d’un emblème et de texte sur le drapeau",
+      "start": 103,
+      "end": 108,
+      "sha256": "0785873e9f9b4b8abb33ab57aca090151f30cd81db335d5f72996ce5a6e80a86"
+    },
+    {
+      "source": "b (1).png",
+      "ht": "Peyizaj yon vil anba limyè solèy la",
+      "fr": "Paysage urbain sous la lumière du soleil",
+      "start": 108,
+      "end": 113,
+      "sha256": "73986dabf0557403107b8770f12a27852b297851b7fb340a5b6654898de39981"
+    },
+    {
+      "source": "b (2).png",
+      "ht": "Konpozisyon vizyèl HaitiGov",
+      "fr": "Composition visuelle HaitiGov",
+      "start": 113,
+      "end": 118,
+      "sha256": "b52d1617f1ce026d88a210f86712d186365ad72bb98a74e67d6b63364880c459"
+    },
+    {
+      "source": "b (3).png",
+      "ht": "Mak wonn ak tèks Repiblik Ayiti",
+      "fr": "Marque circulaire portant le texte République d’Haïti",
+      "start": 118,
+      "end": 123,
+      "sha256": "15a884a3d0da17687556f83c1d41d5fbc7501602b0c0c40f52da691f4cb9f655"
+    },
+    {
+      "source": "b (4).png",
+      "ht": "Mak ak tèks Anbasad Repiblik Ayiti",
+      "fr": "Marque portant le texte Ambassade de la République d’Haïti",
+      "start": 123,
+      "end": 128,
+      "sha256": "45edbcce7b32adebef6958b44675067a6823bfc63d77b8e5cf0a265b0a0490d7"
+    },
+    {
+      "source": "b (5).png",
+      "ht": "Ilistrasyon yon fanm k ap sèvi ak telefòn",
+      "fr": "Illustration d’une femme utilisant un téléphone",
+      "start": 128,
+      "end": 133,
+      "sha256": "f32463c9a70a628207db43e5fd97bb1118ba9ac03e6b7c2e20a1b695c510ab04"
+    },
+    {
+      "source": "b (6).png",
+      "ht": "Konpozisyon yon anblèm ak pye palmis",
+      "fr": "Composition d’un emblème avec un palmier",
+      "start": 133,
+      "end": 138,
+      "sha256": "109d71dfd7b1b00b85d3c039386b42366bb5c3c4a7f6c810ffbac8f2f9b3a5bc"
+    },
+    {
+      "source": "b (7).png",
+      "ht": "Ilistrasyon yon fò nan limyè solèy",
+      "fr": "Illustration d’une forteresse au soleil",
+      "start": 138,
+      "end": 143,
+      "sha256": "f4a577fa1fa091b694f67e13a72db1642c014b38f33c28490e24a1024e0d413a"
+    },
+    {
+      "source": "b (8).png",
+      "ht": "Ilistrasyon yon vil ak yon bè",
+      "fr": "Illustration d’une ville et d’une baie",
+      "start": 143,
+      "end": 148,
+      "sha256": "151f0827d79bc0f2a42bf505f09fea9dc28b27b1a13412347558c30ee2715545"
+    },
+    {
+      "source": "b (9).png",
+      "ht": "Ilistrasyon dans ak kostim kolore",
+      "fr": "Illustration de danse et de costumes colorés",
+      "start": 148,
+      "end": 153,
+      "sha256": "743768aa76448b63b9e718f88ba48c594e2869e0531938d7673eb81dc4e21f92"
+    },
+    {
+      "source": "b (10).png",
+      "ht": "Ilistrasyon litoral ak mòn",
+      "fr": "Illustration d’un littoral et de montagnes",
+      "start": 153,
+      "end": 158,
+      "sha256": "15a61e57acd7641c03154d8882c7eb8793e820811072a01a08569ac6ddc69232"
+    },
+    {
+      "source": "b (11).png",
+      "ht": "Konpozisyon yon anblèm sou fon blan",
+      "fr": "Composition d’un emblème sur fond blanc",
+      "start": 158,
+      "end": 163,
+      "sha256": "bbcc66ed1d2ca5c3fa2ec2a89b48e63a252a39d7aed790f453344dd48178a6b5"
+    },
+    {
+      "source": "flag-artibonite.png",
+      "ht": "Mak konseptyèl ki gen non Latibonit",
+      "fr": "Marque conceptuelle portant le nom Artibonite",
+      "start": 163,
+      "end": 168,
+      "sha256": "df40c2337360427645da8513ce3c15d89e4dce3e5eafd5f0f06e9ea7147a136b"
+    },
+    {
+      "source": "flag-centre.png",
+      "ht": "Mak konseptyèl ki gen non Sant",
+      "fr": "Marque conceptuelle portant le nom Centre",
+      "start": 168,
+      "end": 173,
+      "sha256": "df5b40947f0797b49f562c7266e3a2dfc37ecff4a1171a13233e65904954e399"
+    },
+    {
+      "source": "flag-Grand’Anse.png",
+      "ht": "Mak konseptyèl ki gen non Grandans",
+      "fr": "Marque conceptuelle portant le nom Grand’Anse",
+      "start": 173,
+      "end": 178,
+      "sha256": "bc69b21d2bfc841480dd8b69110334efcb21f07dde419a4bb3adba6112560ae5"
+    },
+    {
+      "source": "flag-Nippes.png",
+      "ht": "Mak konseptyèl ki gen non Nip",
+      "fr": "Marque conceptuelle portant le nom Nippes",
+      "start": 178,
+      "end": 183,
+      "sha256": "3d47aea48c0798ca77987fd4c122a3ab3d120fc04af1352de7ee147e897639eb"
+    },
+    {
+      "source": "flag-nord-est.png",
+      "ht": "Mak konseptyèl ki gen non Nòdès",
+      "fr": "Marque conceptuelle portant le nom Nord-Est",
+      "start": 183,
+      "end": 188,
+      "sha256": "3f42f97b51a609f654bf4369d27e49fdb6aac738808681aa8f87fd65c6b14450"
+    },
+    {
+      "source": "flag-nord-ouest.png",
+      "ht": "Mak konseptyèl ki gen non Nòdwès",
+      "fr": "Marque conceptuelle portant le nom Nord-Ouest",
+      "start": 188,
+      "end": 193,
+      "sha256": "d3b11b749b63d5b85a4466ca23000e600e55b33bc845052232d721b7f62c2240"
+    },
+    {
+      "source": "flag-nord.png",
+      "ht": "Mak konseptyèl ki gen non Nò",
+      "fr": "Marque conceptuelle portant le nom Nord",
+      "start": 193,
+      "end": 198,
+      "sha256": "7ff00cd0db6984aebbceab374e3830d86e4e3b310f4e0d97d0ce9564bf4f6f5d"
+    },
+    {
+      "source": "flag-ouest.png",
+      "ht": "Mak konseptyèl ki gen non Lwès",
+      "fr": "Marque conceptuelle portant le nom Ouest",
+      "start": 198,
+      "end": 203,
+      "sha256": "702e4b6e175a0434bee7e1c31b2508dc12beab71e297428794fd2efaf625446a"
+    },
+    {
+      "source": "flag-Sud.png",
+      "ht": "Mak konseptyèl ki gen non Sid",
+      "fr": "Marque conceptuelle portant le nom Sud",
+      "start": 203,
+      "end": 208,
+      "sha256": "a3c1013f9ed1be38cf27a08d53029f1ca79a0397ff7014b4f8335ae59134bdc7"
+    },
+    {
+      "source": null,
+      "ht": "Dekouvri istwa a ak sous li yo sou HaitiGov",
+      "fr": "Découvrez l’histoire et ses sources sur HaitiGov",
+      "start": 208,
+      "end": 211
+    }
+  ]
+}

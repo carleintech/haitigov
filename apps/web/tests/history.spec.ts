@@ -106,4 +106,87 @@ for (const historyPage of historyPages) {
       .analyze();
     expect(accessibility.violations).toEqual([]);
   });
+
+  test(`${historyPage.locale} history film plays with captions and an accessible transcript`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`${historyPage.path}#media`);
+    const video = page.locator("#media video");
+    await expect(video).toBeVisible();
+    await expect(video).toHaveAttribute("controls", "");
+    await expect(video).toHaveAttribute("preload", "none");
+    await expect(video).not.toHaveAttribute("autoplay");
+    await expect(video.locator("track[default]")).toHaveAttribute("srclang", historyPage.locale);
+    await expect(page.locator("#history-video-notice")).toContainText(
+      historyPage.locale === "fr" ? "non documentaire" : "pa dokimantè",
+    );
+    const transcript = page.locator(".hg-history-transcript");
+    await transcript.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(transcript).toHaveAttribute("open", "");
+    await expect(transcript.locator("li")).toHaveCount(43);
+    await expect(transcript).toContainText(historyPage.locale === "fr" ? "Sud" : "Sid");
+    await expect(page.locator("#media a[download]").first()).toHaveAttribute(
+      "href",
+      "/history-media/ayiti-nan-imaj.mp4",
+    );
+    await video.evaluate((element: HTMLVideoElement) => {
+      element.load();
+    });
+    await expect
+      .poll(() => video.evaluate((element: HTMLVideoElement) => element.readyState))
+      .toBeGreaterThanOrEqual(2);
+    expect(await video.evaluate((element: HTMLVideoElement) => element.duration)).toBeCloseTo(
+      211,
+      1,
+    );
+    expect(await video.evaluate((element: HTMLVideoElement) => element.paused)).toBe(true);
+    await expect
+      .poll(() =>
+        video.evaluate((element: HTMLVideoElement) => {
+          const track = Array.from(element.textTracks).find((item) => item.mode === "showing");
+          return { language: track?.language, cues: track?.cues?.length };
+        }),
+      )
+      .toEqual({ language: historyPage.locale, cues: 43 });
+    await video.evaluate(async (element: HTMLVideoElement) => {
+      element.muted = true;
+      await element.play();
+    });
+    await expect
+      .poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime))
+      .toBeGreaterThan(0);
+    await video.evaluate((element: HTMLVideoElement) => {
+      element.pause();
+      element.currentTime = 205;
+    });
+    await expect
+      .poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime))
+      .toBe(205);
+    expect(await video.evaluate((element: HTMLVideoElement) => element.error)).toBeNull();
+    await expect
+      .poll(() =>
+        video.evaluate((element: HTMLVideoElement) => {
+          const track = Array.from(element.textTracks).find((item) => item.mode === "showing");
+          return track?.activeCues?.[0]?.startTime;
+        }),
+      )
+      .toBe(203);
+    const cues = await page.request.get(`/history-media/${historyPage.locale}.vtt`);
+    expect(cues.ok()).toBe(true);
+    expect((await cues.text()).match(/ --> /g)).toHaveLength(43);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      390,
+    );
+  });
+
+  test(`${historyPage.locale} history film reports a media failure`, async ({ page }) => {
+    await page.route("**/history-media/ayiti-nan-imaj.mp4", (route) => route.abort());
+    await page.goto(historyPage.path);
+    await page.locator("#media video").evaluate((element: HTMLVideoElement) => {
+      element.load();
+    });
+    await expect(page.locator("#media [role=alert]")).toBeVisible();
+  });
 }

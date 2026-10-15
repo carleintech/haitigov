@@ -73,8 +73,37 @@ seals, evidence of current conditions, or proof of government adoption. Visible
 localized notices identify that limitation. History claims retain their separate
 source citations; artwork does not establish factual provenance.
 Production publication still requires independent rights and identity review.
-Missing videos, slides, captions and documentary media remain pending rather
-than being simulated.
+Additional videos, slides and documentary media remain pending rather than
+being simulated.
+
+## First history-page film: Ayiti nan imaj / Haïti en images
+
+On 2026-10-14 the owner confirmed public-use permission for all 41 images in
+`docs/video` and the supplied `Haiti_Cherie.mp3` recording. The owner identified
+the recording as instrumental, without speech or lyrics. This records the
+owner's statements, not independent copyright, identity or factual verification.
+
+Reproduce the 211-second, 1280x720 H.264/AAC film with
+`node scripts/prepare-history-video.mjs` from the repository root. FFmpeg and
+FFprobe must be available on PATH. The generator reuses Next's image processor,
+rejects an unreviewed image inventory, preserves every complete image and source
+watermark, and records source SHA-256 hashes and timecoded bilingual descriptions
+in `apps/web/app/_data/history-media.json`. The soundtrack is lowered and faded
+at the beginning/end; it is not looped. Each image lasts five seconds, with
+three-second opening/closing titles and brief fades.
+
+Outputs are in `apps/web/public/history-media`: the MP4, a static poster and
+HT/FR WebVTT captions. The page offers native playback/volume/fullscreen controls,
+no autoplay, captions and a full visual transcript. The poster stays static
+until the visitor chooses playback, including with reduced-motion preferences.
+
+The mixed supplied photographs, artwork, marks and nine conceptual department
+flags are not a verified historical documentary or a complete territorial flag
+registry. The film does not authenticate depicted places, dates, official seals,
+embassy relationships or department identities. A bilingual prototype notice is
+embedded throughout the film and repeated beside the player. No missing tenth
+flag or historical claims were invented. Independent rights/identity review
+remains a production-readiness gate.
 
 ## Retained historical photography
 
