@@ -915,7 +915,22 @@ Platform: HaitiGov
   passed; connected Next runtime reported no errors.
 - Owner authorized committing and publishing this montage on 2026-10-14.
   Publication targets only `carleintech/haitigov` and its dedicated `haitigov`
-  Vercel project; deployment and live verification are pending. Independent
+  Vercel project. Feature commit `fe62b1ded690bf768764f2b0b7533a4c16451ebd`
+  was pushed to `main`; Git-triggered production deployment
+  `dpl_5hDvVEHMzsbPAX2BcRFcSvMBJYE8` is READY (20-second build).
+  Production aliases include `haitigov.vercel.app`, `haitigov.org` and
+  `www.haitigov.org`. Real Chromium smoke checks passed HT/FR history playback
+  at 390px and 1440px: 211-second duration, seeking, default locale captions,
+  all 43 cues/transcript entries, no horizontal overflow or page runtime errors.
+  The deployment error-log query returned no logs; this does not establish
+  monitoring or log-drain readiness.
+- Feature CI run `38664448658` passed quality/build and visual regression;
+  CodeQL run `38664448635` passed. Supply Chain Security run `38664448628`
+  passed SBOM, infrastructure configuration, dependency and secret checks, but
+  its foundation-container Grype scan failed on high-or-higher vulnerabilities.
+  That separate container gate remains unresolved; no scanner was disabled.
+  Unrelated announcements/API/database work was excluded from the commit.
+  Independent
   rights/identity review, manual accessibility review, the required Node patch
   upgrade and other production gates remain open.
 
